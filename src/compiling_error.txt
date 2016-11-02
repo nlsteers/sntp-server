@@ -1,0 +1,31 @@
+/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/sntp-client.c:11:78: error: expected ‘;’, ‘,’ or ‘)’ before numeric constant
+ void convert_ntp_time_into_unix_time(struct ntp_time_t *ntp, struct timeval *unix)
+                                                                              ^
+/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/sntp-client.c:17:54: error: expected ‘;’, ‘,’ or ‘)’ before numeric constant
+ void convert_unix_time_into_ntp_time(struct timeval *unix, struct ntp_time_t *ntp)
+                                                      ^
+/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/sntp-client.c: In function ‘main’:
+/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/sntp-client.c:26:20: error: expected identifier or ‘(’ before numeric constant
+     struct timeval unix;
+                    ^
+/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/sntp-client.c:29:18: error: lvalue required as unary ‘&’ operand
+     gettimeofday(&unix, NULL);
+                  ^
+/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/sntp-client.c:30:40: error: request for member ‘tv_sec’ in something not a structure or union
+     printf("UNIX Time: %ld %ld\n", unix.tv_sec, unix.tv_usec);
+                                        ^
+/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/sntp-client.c:30:53: error: request for member ‘tv_usec’ in something not a structure or union
+     printf("UNIX Time: %ld %ld\n", unix.tv_sec, unix.tv_usec);
+                                                     ^
+/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/sntp-client.c:33:37: error: lvalue required as unary ‘&’ operand
+     convert_unix_time_into_ntp_time(&unix, &ntp);
+                                     ^
+/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/sntp-client.c:37:43: error: lvalue required as unary ‘&’ operand
+     convert_ntp_time_into_unix_time(&ntp, &unix);
+                                           ^
+/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/sntp-client.c:38:40: error: request for member ‘tv_sec’ in something not a structure or union
+     printf("UNIX Time: %ld %ld\n", unix.tv_sec, unix.tv_usec);
+                                        ^
+/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/sntp-client.c:38:53: error: request for member ‘tv_usec’ in something not a structure or union
+     printf("UNIX Time: %ld %ld\n", unix.tv_sec, unix.tv_usec);
+                                                     ^
