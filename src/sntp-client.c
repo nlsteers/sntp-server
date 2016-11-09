@@ -1,39 +1,48 @@
 #include <stdio.h>
-#include <stdint.h>
-#include <sys/time.h>
 #include <stdlib.h>
+#include <stdint.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netdb.h>
+#include <arpa/inet.h>
+#include <time.h>
 
-struct ntp_time_t {
-    uint32_t   second;
-    uint32_t    fraction;
+struct sntpPacket {
+  unsigned int LI : 2;
+  unsigned int VN : 3;
+  unsigned int mode : 3;
+	uint8_t stratum;
+	uint8_t poll;
+	uint8_t precision;
+	uint32_t root_delay;
+	uint32_t root_dispersion;
+	uint32_t ref_ID;
+	uint32_t ref_ts_sec;
+	uint32_t ref_ts_frac;
+	uint32_t origin_ts_sec;
+	uint32_t origin_ts_frac;
+	uint32_t recv_ts_sec;
+	uint32_t recv_ts_frac;
+	uint32_t trans_ts_sec;
+	uint32_t trans_ts_frac;
 };
 
-void convert_ntp_time_into_unix_time(struct ntp_time_t *ntp, struct timeval *unix)
-{
-    unix->tv_sec = ntp->second - 0x83AA7E80; // the seconds from Jan 1, 1900 to Jan 1, 1970
-    unix->tv_usec = (uint32_t)( (double)ntp->fraction * 1.0e6 / (double)(1LL<<32) );
-}
-
-void convert_unix_time_into_ntp_time(struct timeval *unix, struct ntp_time_t *ntp)
-{
-    ntp->second = unix->tv_sec + 0x83AA7E80;
-    ntp->fraction = (uint32_t)( (double)(unix->tv_usec+1) * (double)(1LL<<32) * 1.0e-6 );
-}
 
 int main()
 {
-    struct ntp_time_t ntp;
-    struct timeval unix;
 
-    // get time unix time via gettimeofday
-    gettimeofday(&unix, NULL);
-    printf("UNIX Time: %ld %ld\n", unix.tv_sec, unix.tv_usec);
+  struct sntpPacket packet;
+  memset(&packet, 0, sizeof(struct sntpPacket));
 
-    // convert unix time to ntp time
-    convert_unix_time_into_ntp_time(&unix, &ntp);
-    printf("NTP Time: %ld %ld\n", ntp.second, ntp.fraction);
+  packet.LI = 0;
+  packet.VN = 4;
+  packet.mode = 3;
 
-    // convert ntp time back to unix time to see whether they are same
-    convert_ntp_time_into_unix_time(&ntp, &unix);
-    printf("UNIX Time: %ld %ld\n", unix.tv_sec, unix.tv_usec);
+  *((uint8_t*)&packet) = 0x1b;
+
+
+
+
+
 }
