@@ -39,6 +39,7 @@ int main(int argc, char *argv[])
   packet.VN = 4;
   packet.mode = 3;
 
+
   *((uint8_t*)&packet) = 0x1b;
 
 
