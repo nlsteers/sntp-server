@@ -1,13 +1,19 @@
 #include <stdio.h>
 #include <stdint.h>
+#include <string.h>
 #include <time.h>
 #include <sys/time.h>
 #include <stdlib.h>
+
+#include <sys/timeb.h>
 
 struct ntp_time_t {
     uint32_t   second;
     uint32_t   fraction;
 };
+
+
+
 
 void ntp_time_to_unix_time(struct ntp_time_t *ntp, struct timeval *tv)
 {
@@ -21,13 +27,28 @@ void unix_time_to_ntp_time(struct timeval *tv, struct ntp_time_t *ntp)
     ntp->fraction = (uint32_t)( (double)(tv->tv_usec+1) * (double)(1LL<<32) * 0.000001 );
 }
 
-int main()
+void print_unix_to_hr(struct timeval *tv)
+{
+  time_t t2 = (time_t) tv->tv_sec;
+  uint32_t milliseconds = tv->tv_usec / 1000;
+  struct tm* tm_info;
+  tm_info = localtime(&t2);
+  char buffer[200];
+  char milliBuffer[100];
+
+  sprintf(milliBuffer, "%u", milliseconds);
+  strftime(buffer, 30, "%Y-%m-%d %H:%M:%S.", tm_info);
+
+  strcat(buffer, milliBuffer);
+
+  printf("Time is: %s\n", buffer);
+}
+
+/*int main()
 {
     struct ntp_time_t ntp;
     struct timeval tv = {0};
-    time_t now;
-    struct tm ts;
-    char buf[80];
+
 
     // get time unix time via gettimeofday
     gettimeofday(&tv, NULL);
@@ -41,24 +62,25 @@ int main()
     ntp_time_to_unix_time(&ntp, &tv);
     printf("UNIX Time: %ld %ld\n", tv.tv_sec, tv.tv_usec);
 
-
     unsigned long long millisecondsSinceEpoch = (unsigned long long)(tv.tv_sec) * 1000 + (unsigned long long)(tv.tv_usec) / 1000;
 
     printf("Milliseconds since epoch (UNIX) %llu\n", millisecondsSinceEpoch);
 
-    // Get current time
-    time(&now);
 
-    printf("Time: %lu \n", now);
-    // Format time, "ddd yyyy-mm-dd hh:mm:ss zzz"
-    ts = *localtime(&now);
+    //convert to human readable
 
-    printf("localtime: %d %d %d \n", ts.tm_hour, ts.tm_min, ts.tm_sec);
+    time_t t2 = (time_t) tv.tv_sec;
+    uint32_t milliseconds = tv.tv_usec / 1000;
+    struct tm* tm_info;
+    tm_info = localtime(&t2);
+    char buffer[200];
+    char milliBuffer[100];
 
-    strftime(buf, sizeof(buf), "%a %Y-%m-%d %H:%M:%S %Z", &ts);
-    printf("%s\n", buf);
-    return 0;
+    sprintf(milliBuffer, "%u", milliseconds);
+    strftime(buffer, 30, "%Y-%m-%d %H:%M:%S.", tm_info);
 
+    strcat(buffer, milliBuffer);
 
+    printf("Time is: %s\n", buffer);
 
-}
+}*/
