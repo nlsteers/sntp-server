@@ -14,7 +14,7 @@
 #include "include/timeconversion.c"
 
 #define PORT 123
-#define MAXBUFLEN 100
+
 
 struct sntpPacket {
   unsigned int LI : 2;
@@ -57,11 +57,10 @@ int main(int argc, char *argv[])
   int c;
   int count;
   char hn[256];
-  count = 0;
 
   printf("Enter hostname: ");
   for(count = 0; (c = getchar()) != '\n' && count < 256; count++) {
-      hn[count] = c;
+      hn[count] = (char) c;
   }
   hn[count] = '\0';
 
@@ -122,7 +121,7 @@ int main(int argc, char *argv[])
 
 //convert to UNIX time
   ntp_time_to_unix_time(&ntp, &tv);
-  printf("UNIX Time: %ld %ld\n", tv.tv_sec, tv.tv_usec);
+  printf("UNIX Time: %ld %d\n", tv.tv_sec, tv.tv_usec);
 
   unsigned long long millisecondsSinceEpoch = (unsigned long long)(tv.tv_sec) * 1000 + (unsigned long long)(tv.tv_usec) / 1000;
 //print time in milliseconds

@@ -4,13 +4,8 @@
 #include <time.h>
 #include <sys/time.h>
 #include <stdlib.h>
+#include "ntp-structure.h"
 
-#include <sys/timeb.h>
-
-struct ntp_time_t {
-    uint32_t   second;
-    uint32_t   fraction;
-};
 
 
 
@@ -30,13 +25,13 @@ void unix_time_to_ntp_time(struct timeval *tv, struct ntp_time_t *ntp)
 void print_unix_to_hr(struct timeval *tv)
 {
   time_t t2 = (time_t) tv->tv_sec;
-  uint32_t milliseconds = tv->tv_usec / 1000;
+  __darwin_time_t milliseconds = tv->tv_usec / 1000;
   struct tm* tm_info;
   tm_info = localtime(&t2);
   char buffer[200];
   char milliBuffer[100];
 
-  sprintf(milliBuffer, "%u", milliseconds);
+  sprintf(milliBuffer, "%ld", milliseconds);
   strftime(buffer, 30, "%Y-%m-%d %H:%M:%S.", tm_info);
 
   strcat(buffer, milliBuffer);
