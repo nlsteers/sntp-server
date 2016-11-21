@@ -11,8 +11,6 @@
 #include <netdb.h>
 #include <time.h>
 #include <sys/time.h>
-
-#include "include/sntp-packet.h"
 #include "include/time-conversion.h"
 
 #define PORT 123
@@ -20,17 +18,24 @@
 
 int main(int argc, char *argv[]) {
 
-    struct sntpPacket packet;
-    struct ntp_time_t ntp;
-    struct timeval tv = {0};
+    struct sntpPacket sendPacket, recPacket;
+    struct ntp_time_t ntp, destination, originntp, transmitntp, receiventp = {0};
+    struct timeval tv, arrival, origintv, transmittv, receivetv = {0};
 
-    memset(&packet, 0, sizeof(struct sntpPacket));
 
-    packet.LI = 0;
-    packet.VN = 4;
-    packet.mode = 3;
+    memset(&sendPacket, 0, sizeof(struct sntpPacket));
+    memset(&recPacket, 0, sizeof(struct sntpPacket));
 
-    *((uint8_t *) &packet) = 0x1b;
+
+/*
+    sendPacket.LI = 0;
+    sendPacket.VN = 4;
+    sendPacket.mode = 3;
+*/
+
+//set flags
+
+    *((uint8_t *) &sendPacket) = 0x1b;
 
     int sockfd, numbytes;
 
@@ -39,9 +44,9 @@ int main(int argc, char *argv[]) {
     struct sockaddr_in their_addr;
 
     // THIS IS TEMPORARY, REMOVE ON RELEASE
-    char hn[18] = "ntp2a.mcc.ac.uk";
+    //char hn[18] = "ntp2a.mcc.ac.uk";
 
-    /*  Loop for hostname selection
+    /*  Loop for hostname selection */
     int c;
     int count;
 
@@ -52,7 +57,7 @@ int main(int argc, char *argv[]) {
         hn[count] = (char) c;
     }
     hn[count] = '\0';
-    */
+
 
 
     if ((he = gethostbyname(hn)) == NULL) {
@@ -73,87 +78,123 @@ int main(int argc, char *argv[]) {
     their_addr.sin_addr = *((struct in_addr *) he->h_addr);
 
 
+//get reference time
+
     get_ntp_time(&tv, &ntp);
 
+    sendPacket.trans_ts_sec = ntp.second;
+    sendPacket.trans_ts_frac = ntp.fraction;
 
-    packet.trans_ts_sec = (uint32_t) ntp.second;
-    packet.trans_ts_frac = ntp.fraction;
 
-    printf("%u, %u \n", packet.trans_ts_sec, packet.trans_ts_frac);
+//change byte order
 
-    //change byte order
-    packet.ref_ts_sec = htonl(packet.ref_ts_sec);
-    packet.ref_ts_frac = htonl(packet.ref_ts_frac);
-    packet.origin_ts_sec = htonl(packet.origin_ts_sec);
-    packet.origin_ts_frac = htonl(packet.origin_ts_frac);
-    packet.recv_ts_sec = htonl(packet.recv_ts_sec);
-    packet.recv_ts_frac = htonl(packet.recv_ts_frac);
-    packet.trans_ts_sec = htonl(packet.recv_ts_sec);
-    packet.trans_ts_frac = htonl(packet.recv_ts_frac);
+    long tempSeconds = htonl(sendPacket.trans_ts_sec);
+    long tempFractions = htonl(sendPacket.trans_ts_frac);
 
-    //send packet
-    if ((numbytes = (int) sendto(sockfd, &packet, sizeof(packet), 0,
+    sendPacket.trans_ts_sec = tempSeconds;
+    sendPacket.trans_ts_frac = tempFractions;
+
+//send packet
+    if ((numbytes = (int) sendto(sockfd, &sendPacket, sizeof(sendPacket), 0,
                                  (struct sockaddr *) &their_addr, sizeof(struct sockaddr))) == -1) {
         perror("SNTP sendto error");
         exit(1);
     }
     printf("Sent %d bytes to %s\n", numbytes, inet_ntoa(their_addr.sin_addr));
 
-
 //set address length
     addr_len = sizeof(struct sockaddr_in);
 
+
+    memset(&tv, 0, sizeof(struct timeval));
+
+
 //listen for response
-    if ((numbytes = (int) recvfrom(sockfd, &packet, sizeof(packet), 0,
+
+    if ((numbytes = (int) recvfrom(sockfd, &recPacket, sizeof(recPacket), 0,
                                    (struct sockaddr *) &their_addr, &addr_len)) == -1) {
         perror("SNTP recvfrom error");
         exit(1);
     }
-    printf("Received %d bytes from %s\n", numbytes, inet_ntoa(their_addr.sin_addr));
+    get_time(&arrival);
+    get_ntp_time(&tv, &destination);
+
+    printf("Received %d bytes from %s.\n", numbytes, inet_ntoa(their_addr.sin_addr));
+
+//print network packet
+
+  printf("\nReceived packet:\n");
+
+  print_network_packet(&recPacket);
 
 
-//print ntp time
-
-    ntp.second = ntohl(packet.recv_ts_sec);
-    ntp.fraction = ntohl(packet.recv_ts_frac);
 
 
 
 
+/*d = (T4 - T1) - (T3 - T2) */
 
-    printf("\nPacket contains: \n"
-                   "Stratum: %u \n"
-                   "Poll: %u \n"
-                   "Precision: %i \n"
-                   "Root Delay: %i \n"
-                   "Root Dispersion: %u \n"
-                   "Ref ID: %u \n"
-                   "Reference Seconds: %u \n"
-                   "Reference Fractions: %u \n"
-                   "Origin Seconds: %u \n"
-                   "Origin Fractions: %u \n"
-                   "Received Seconds: %u \n"
-                   "Received Fractions: %u \n"
-                   "Transmit Seconds: %u \n"
-                   "Transmit Fractions: %u \n\n\n",
-           packet.stratum,
-           packet.poll,
-           packet.precision,
-           ntohl(packet.root_delay),
-           ntohl(packet.root_dispersion),
-           ntohl(packet.ref_ID),
-           ntohl(packet.ref_ts_sec),
-           ntohl(packet.ref_ts_frac),
-           ntohl(packet.origin_ts_sec),
-           ntohl(packet.origin_ts_frac),
-           ntohl(packet.recv_ts_sec),
-           ntohl(packet.recv_ts_frac),
-           ntohl(packet.trans_ts_sec),
-           ntohl(packet.trans_ts_frac));
+
+//change byte order
+
+originntp.second = ntohl(recPacket.origin_ts_sec);
+originntp.fraction = ntohl(recPacket.origin_ts_frac);
+
+
+transmitntp.second = ntohl(recPacket.trans_ts_sec);
+transmitntp.fraction = ntohl(recPacket.trans_ts_frac);
+
+
+receiventp.second = ntohl(recPacket.recv_ts_sec);
+receiventp.fraction = ntohl(recPacket.recv_ts_frac);
+
+
+
+ntp_time_to_unix_time(&originntp, &origintv);
+
+ntp_time_to_unix_time(&transmitntp, &transmittv);
+
+ntp_time_to_unix_time(&receiventp, &receivetv);
+
+//DELAY--------------------------------------------
+
+double delaySeconds, delayMicroseconds;
+delaySeconds = ((double) arrival.tv_sec - (double) origintv.tv_sec) -
+               ((double) transmittv.tv_sec - (double) receivetv.tv_sec);
+delayMicroseconds = ((double) arrival.tv_usec - (double) origintv.tv_usec) -
+                    ((double) transmittv.tv_usec - (double) receivetv.tv_usec);
+
+double delayTotal = delaySeconds + (delayMicroseconds / 1000000);
+
+printf("delay: %f\n", delayTotal );
+
+//------------------------------------------------------
+
+//OFFSET------------------------------------------------
+
+double offsetSeconds, offsetMicroseconds;
+offsetSeconds = ((double) receivetv.tv_sec - (double) origintv.tv_sec) +
+                ((double) transmittv.tv_sec - (double) arrival.tv_sec) / 2;
+offsetMicroseconds = ((double) receivetv.tv_usec - (double) origintv.tv_usec) +
+                     ((double) transmittv.tv_usec - (double) arrival.tv_usec) / 2;
+
+double offsetTotal = offsetSeconds + (offsetMicroseconds / 1000000);
+
+
+printf("offset: %f\n", offsetTotal );
+
+//------------------------------------------------------
+
 
 //convert to UNIX time
+
+    memset(&ntp, 0, sizeof(struct ntp_time_t));
+
+    ntp.second = ntohl(recPacket.recv_ts_sec);
+    ntp.fraction = ntohl(recPacket.recv_ts_frac);
+
     ntp_time_to_unix_time(&ntp, &tv);
-    printf("UNIX Time: %ld %d\n", tv.tv_sec, tv.tv_usec);
+    printf("UNIX Time: %ld %ld\n", tv.tv_sec, tv.tv_usec);
 
     unsigned long long millisecondsSinceEpoch =
             (unsigned long long) (tv.tv_sec) * 1000 + (unsigned long long) (tv.tv_usec) / 1000;
@@ -162,6 +203,9 @@ int main(int argc, char *argv[]) {
 
 //convert to human readable
     print_unix_to_hr(&tv);
+
+
+
 
     close(sockfd);
     return 0;
