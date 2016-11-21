@@ -1,14 +1,19 @@
+//
+// Created by Nathaniel Steers on 20/11/2016.
+//
+
+#ifndef SNTP_COURSEWORK_TIME_CONVERSION_H
+#define SNTP_COURSEWORK_TIME_CONVERSION_H
+
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
 #include <time.h>
 #include <sys/time.h>
-#include <stdlib.h>
-#include "ntp-structure.h"
+#include "ntp-time.h"
 
 
-
-
+//ref http://waitingkuo.blogspot.co.uk/2012/06/conversion-between-ntp-time-and-unix.html
 
 void ntp_time_to_unix_time(struct ntp_time_t *ntp, struct timeval *tv)
 {
@@ -24,19 +29,25 @@ void unix_time_to_ntp_time(struct timeval *tv, struct ntp_time_t *ntp)
 
 void print_unix_to_hr(struct timeval *tv)
 {
-  time_t t2 = (time_t) tv->tv_sec;
-  __darwin_time_t milliseconds = tv->tv_usec / 1000;
-  struct tm* tm_info;
-  tm_info = localtime(&t2);
-  char buffer[200];
-  char milliBuffer[100];
+    time_t t2 = (time_t) tv->tv_sec;
+    __darwin_time_t milliseconds = tv->tv_usec / 1000;
+    struct tm* tm_info;
+    tm_info = localtime(&t2);
+    char buffer[200];
+    char milliBuffer[100];
 
-  sprintf(milliBuffer, "%ld", milliseconds);
-  strftime(buffer, 30, "%Y-%m-%d %H:%M:%S.", tm_info);
+    sprintf(milliBuffer, "%ld", milliseconds);
+    strftime(buffer, 30, "%Y-%m-%d %H:%M:%S.", tm_info);
 
-  strcat(buffer, milliBuffer);
+    strcat(buffer, milliBuffer);
 
-  printf("Time is: %s\n", buffer);
+    printf("Time is: %s\n", buffer);
+}
+
+void get_ntp_time(struct timeval *tv, struct ntp_time_t *ntp)
+{
+    gettimeofday(tv, NULL);
+    unix_time_to_ntp_time(tv, ntp);
 }
 
 /*int main()
@@ -79,3 +90,6 @@ void print_unix_to_hr(struct timeval *tv)
     printf("Time is: %s\n", buffer);
 
 }*/
+
+
+#endif //SNTP_COURSEWORK_TIME_CONVERSION_H
