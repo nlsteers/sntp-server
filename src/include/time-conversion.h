@@ -40,18 +40,18 @@ void get_time(struct timeval *tv){
 void print_unix_to_hr(struct timeval *tv)
 {
     time_t t2 = (time_t) tv->tv_sec;
-    uint32_t milliseconds = (uint32_t) (tv->tv_usec / 1000);
+    uint32_t milliseconds = (uint32_t) (tv->tv_usec / 1);
     struct tm* tm_info;
     tm_info = localtime(&t2);
     char buffer[200];
     char milliBuffer[100];
 
     sprintf(milliBuffer, "%u", milliseconds);
-    strftime(buffer, 30, "%Y-%m-%d %H:%M:%S.", tm_info);
+    strftime(buffer, 50, "%Y-%m-%d %H:%M:%S.", tm_info);
 
     strcat(buffer, milliBuffer);
 
-    printf("Time is: %s\n", buffer);
+    printf("%s ", buffer);
 }
 
 void get_ntp_time(struct timeval *tv, struct ntp_time_t *ntp)
@@ -60,45 +60,6 @@ void get_ntp_time(struct timeval *tv, struct ntp_time_t *ntp)
     unix_time_to_ntp_time(tv, ntp);
 }
 
-void get_seconds_delay(struct ntp_time_t *ntpdelay, struct ntp_time_t *dest, struct sntpPacket *rec)
-{
-  ntpdelay->second = (dest->second - rec->origin_ts_sec) - (rec->trans_ts_sec - rec->recv_ts_sec);
-}
-
-
-void print_packet(struct sntpPacket *sntp){
-  printf("Packet contains: \n"
-                 "Flags: %X \n"
-                 "Stratum: %u \n"
-                 "Poll: %u \n"
-                 "Precision: %i \n"
-                 "Root Delay: %i \n"
-                 "Root Dispersion: %u \n"
-                 "Ref ID: %u \n"
-                 "Reference Seconds: %u \n"
-                 "Reference Fractions: %u \n"
-                 "Origin Seconds: %u \n"
-                 "Origin Fractions: %u \n"
-                 "Received Seconds: %u \n"
-                 "Received Fractions: %u \n"
-                 "Transmit Seconds: %u \n"
-                 "Transmit Fractions: %u \n\n\n",
-         sntp->flags,
-         sntp->stratum,
-         sntp->poll,
-         sntp->precision,
-         sntp->root_delay,
-         sntp->root_dispersion,
-         sntp->ref_ID,
-         sntp->ref_ts_sec,
-         sntp->ref_ts_frac,
-         sntp->origin_ts_sec,
-         sntp->origin_ts_frac,
-         sntp->recv_ts_sec,
-         sntp->recv_ts_frac,
-         sntp->trans_ts_sec,
-         sntp->trans_ts_frac);
-}
 
 
 void print_network_packet(struct sntpPacket *sntp){
