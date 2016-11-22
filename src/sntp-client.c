@@ -91,8 +91,8 @@ int main(int argc, char *argv[]) {
     long tempSeconds = htonl(sendPacket.trans_ts_sec);
     long tempFractions = htonl(sendPacket.trans_ts_frac);
 
-    sendPacket.trans_ts_sec = tempSeconds;
-    sendPacket.trans_ts_frac = tempFractions;
+    sendPacket.trans_ts_sec = (uint32_t) tempSeconds;
+    sendPacket.trans_ts_frac = (uint32_t) tempFractions;
 
 //send packet
     if ((numbytes = (int) sendto(sockfd, &sendPacket, sizeof(sendPacket), 0,
@@ -194,7 +194,7 @@ printf("offset: %f\n", offsetTotal );
     ntp.fraction = ntohl(recPacket.recv_ts_frac);
 
     ntp_time_to_unix_time(&ntp, &tv);
-    printf("UNIX Time: %ld %ld\n", tv.tv_sec, tv.tv_usec);
+    printf("UNIX Time: %ld %ld\n", tv.tv_sec, (long) tv.tv_usec);
 
     unsigned long long millisecondsSinceEpoch =
             (unsigned long long) (tv.tv_sec) * 1000 + (unsigned long long) (tv.tv_usec) / 1000;

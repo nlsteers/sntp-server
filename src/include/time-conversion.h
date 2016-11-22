@@ -26,7 +26,7 @@ void ntp_time_to_unix_time(struct ntp_time_t *ntp, struct timeval *tv)
 
 void unix_time_to_ntp_time(struct timeval *tv, struct ntp_time_t *ntp)
 {
-    ntp->second = tv->tv_sec + 2208988800;
+    ntp->second = (uint32_t) (tv->tv_sec + 2208988800);
     ntp->fraction = (uint32_t)( (double)(tv->tv_usec+1) * (double)(1LL<<32) * 1.0e-6 );
 }
 
@@ -40,7 +40,7 @@ void get_time(struct timeval *tv){
 void print_unix_to_hr(struct timeval *tv)
 {
     time_t t2 = (time_t) tv->tv_sec;
-    uint32_t milliseconds = tv->tv_usec / 1000;
+    uint32_t milliseconds = (uint32_t) (tv->tv_usec / 1000);
     struct tm* tm_info;
     tm_info = localtime(&t2);
     char buffer[200];
