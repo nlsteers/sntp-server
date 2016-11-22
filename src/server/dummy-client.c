@@ -9,8 +9,8 @@
 
 #include "../include/time-conversion.h"
 
-#define PORT 123
-//#define PORT 4950
+//#define PORT 123
+#define PORT 4950
 
 int main(int argc, char *argv[]) {
 
@@ -40,8 +40,8 @@ int main(int argc, char *argv[]) {
     struct sockaddr_in their_addr;
 
     // THIS IS TEMPORARY, REMOVE ON RELEASE
-    //char hn[10] = "localhost";
-    char hn[18] = "0.uk.pool.ntp.org";
+    char hn[10] = "localhost";
+    //char hn[18] = "0.uk.pool.ntp.org";
 
 /*  Loop for hostname selection
 

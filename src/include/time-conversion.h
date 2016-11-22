@@ -43,15 +43,17 @@ void print_unix_to_hr(struct timeval *tv)
     uint32_t milliseconds = (uint32_t) (tv->tv_usec / 1);
     struct tm* tm_info;
     tm_info = localtime(&t2);
-    char buffer[200];
-    char milliBuffer[100];
+    char b1[200];
+    char b2[100];
+    char b3[100];
 
-    sprintf(milliBuffer, "%u", milliseconds);
-    strftime(buffer, 50, "%Y-%m-%d %H:%M:%S.", tm_info);
+    sprintf(b2, "%u", milliseconds);
+    strftime(b1, 50, "%Y-%m-%d %H:%M:%S.", tm_info);
 
-    strcat(buffer, milliBuffer);
-
-    printf("%s ", buffer);
+    strftime(b3, 10, " (%z)", tm_info);
+    strcat(b1, b2);
+    strcat(b1, b3);
+    printf("%s ", b1);
 }
 
 void get_ntp_time(struct timeval *tv, struct ntp_time_t *ntp)
@@ -98,8 +100,7 @@ void print_network_packet(struct sntpPacket *sntp){
 
 
 
-/*int main()
-{
+/*
 
     // convert unix time to ntp time
     unix_time_to_ntp_time(&tv, &ntp);
@@ -110,11 +111,17 @@ void print_network_packet(struct sntpPacket *sntp){
     printf("UNIX Time: %ld %ld\n", tv.tv_sec, tv.tv_usec)
 
 
+ //print time in milliseconds
+
+    printf("UNIX Time: %ld %ld\n", tv.tv_sec, (long) tv.tv_usec);
+
+    unsigned long long millisecondsSinceEpoch =
+            (unsigned long long) (tv.tv_sec) * 1000 + (unsigned long long) (tv.tv_usec) / 1000;
+
+   printf("Milliseconds since epoch (UNIX) %llu\n\n", millisecondsSinceEpoch);
 
 
 
-
-}*/
-
+*/
 
 #endif //SNTP_COURSEWORK_TIME_CONVERSION_H
