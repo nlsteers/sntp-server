@@ -8,7 +8,9 @@
 #include <stdint.h>
 
 struct sntpPacket {
-    uint8_t flags;
+    unsigned MODE:3;
+    unsigned VN:3;
+    unsigned LI:2;
     uint8_t stratum;
     uint8_t poll;
     int8_t precision;

@@ -1,0 +1,1 @@
+/usr/lib64/ccache/cc  -g   CMakeFiles/server.dir/src/server/sntp-server.c.o  -o server 

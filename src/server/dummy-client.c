@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <sys/types.h>
 #include <sys/socket.h>
 #include <netdb.h>
 #include <arpa/inet.h>
@@ -18,20 +17,14 @@ int main(int argc, char *argv[]) {
     struct ntp_time_t ntp, originntp, transmitntp, receiventp = {0};
     struct timeval tv, arrival, origintv, transmittv, receivetv = {0};
 
-
     memset(&sendPacket, 0, sizeof(struct sntpPacket));
     memset(&recPacket, 0, sizeof(struct sntpPacket));
 
-
-/*
-    sendPacket.LI = 0;
-    sendPacket.VN = 4;
-    sendPacket.mode = 3;
-*/
-
 //set flags
 
-    *((uint8_t *) &sendPacket) = 0x1b;
+    sendPacket.LI = 0;
+    sendPacket.VN = 4;
+    sendPacket.MODE = 3;
 
     int sockfd;
 
@@ -90,7 +83,7 @@ int main(int argc, char *argv[]) {
 
 //send packet
     if ((sendto(sockfd, &sendPacket, sizeof(sendPacket), 0,
-                                 (struct sockaddr *) &their_addr, sizeof(struct sockaddr))) == -1) {
+                (struct sockaddr *) &their_addr, sizeof(struct sockaddr))) == -1) {
         perror("SNTP sendto error");
         exit(1);
     }
@@ -103,67 +96,75 @@ int main(int argc, char *argv[]) {
 //listen for response
 
     if ((recvfrom(sockfd, &recPacket, sizeof(recPacket), 0,
-                                   (struct sockaddr *) &their_addr, &addr_len)) == -1) {
+                  (struct sockaddr *) &their_addr, &addr_len)) == -1) {
         perror("SNTP recvfrom error");
         exit(1);
     }
-    get_time(&arrival);
 
+    if (recPacket.stratum != 0) {
+
+        get_time(&arrival);
 
 //change byte order
 
-originntp.second = ntohl(recPacket.origin_ts_sec);
-originntp.fraction = ntohl(recPacket.origin_ts_frac);
+        originntp.second = ntohl(recPacket.origin_ts_sec);
+        originntp.fraction = ntohl(recPacket.origin_ts_frac);
 
-transmitntp.second = ntohl(recPacket.trans_ts_sec);
-transmitntp.fraction = ntohl(recPacket.trans_ts_frac);
+        transmitntp.second = ntohl(recPacket.trans_ts_sec);
+        transmitntp.fraction = ntohl(recPacket.trans_ts_frac);
 
-receiventp.second = ntohl(recPacket.recv_ts_sec);
-receiventp.fraction = ntohl(recPacket.recv_ts_frac);
+        receiventp.second = ntohl(recPacket.recv_ts_sec);
+        receiventp.fraction = ntohl(recPacket.recv_ts_frac);
 
 
-ntp_time_to_unix_time(&originntp, &origintv);
+        ntp_time_to_unix_time(&originntp, &origintv);
 
-ntp_time_to_unix_time(&transmitntp, &transmittv);
+        ntp_time_to_unix_time(&transmitntp, &transmittv);
 
-ntp_time_to_unix_time(&receiventp, &receivetv);
+        ntp_time_to_unix_time(&receiventp, &receivetv);
 
 //DELAY--------------------------------------------
 
-double dSec, dUsec;
-    dSec = ((double) arrival.tv_sec - (double) origintv.tv_sec) -
+        double dSec, dUsec;
+        dSec = ((double) arrival.tv_sec - (double) origintv.tv_sec) -
                ((double) transmittv.tv_sec - (double) receivetv.tv_sec);
-    dUsec = ((double) arrival.tv_usec - (double) origintv.tv_usec) -
-                    ((double) transmittv.tv_usec - (double) receivetv.tv_usec);
+        dUsec = ((double) arrival.tv_usec - (double) origintv.tv_usec) -
+                ((double) transmittv.tv_usec - (double) receivetv.tv_usec);
 
-double dTotal = dSec + (dUsec / 1000000);
+        double dTotal = dSec + (dUsec / 1000000);
 
 //------------------------------------------------------
 
 //OFFSET------------------------------------------------
 
-double oSec, oUsec;
-    oSec = ((double) receivetv.tv_sec - (double) origintv.tv_sec) +
-                ((double) transmittv.tv_sec - (double) arrival.tv_sec) / 2;
-    oUsec = ((double) receivetv.tv_usec - (double) origintv.tv_usec) +
-                     ((double) transmittv.tv_usec - (double) arrival.tv_usec) / 2;
+        double oSec, oUsec;
+        oSec = ((double) receivetv.tv_sec - (double) origintv.tv_sec) +
+               ((double) transmittv.tv_sec - (double) arrival.tv_sec) / 2;
+        oUsec = ((double) receivetv.tv_usec - (double) origintv.tv_usec) +
+                ((double) transmittv.tv_usec - (double) arrival.tv_usec) / 2;
 
-double oTotal = oSec + (oUsec / 1000000);
+        double oTotal = oSec + (oUsec / 1000000);
 
 //------------------------------------------------------
 
 //convert to UNIX time
 
-    memset(&ntp, 0, sizeof(struct ntp_time_t));
+        memset(&ntp, 0, sizeof(struct ntp_time_t));
 
-    ntp.second = ntohl(recPacket.recv_ts_sec);
-    ntp.fraction = ntohl(recPacket.recv_ts_frac);
+        ntp.second = ntohl(recPacket.recv_ts_sec);
+        ntp.fraction = ntohl(recPacket.recv_ts_frac);
 
-    ntp_time_to_unix_time(&ntp, &tv);
+        ntp_time_to_unix_time(&ntp, &tv);
 
 //convert to human readable
-    print_unix_to_hr(&tv);
-    printf("+ %f +/- %f %s(%s)\n", oTotal, dTotal, hn, inet_ntoa(their_addr.sin_addr));
+        print_unix_to_hr(&tv);
+        printf("+ %f +/- %f %s(%s)\n", oTotal, dTotal, hn, inet_ntoa(their_addr.sin_addr));
+    }
+
+    if (recPacket.stratum == 0) {
+        printf("STRATUM is: %u\n", recPacket.stratum);
+        printf("REF ID is: %s\n", recPacket.ref_ID);
+    }
 
     close(sockfd);
     return 0;

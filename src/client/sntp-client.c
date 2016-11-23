@@ -1,8 +1,10 @@
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <sys/types.h>
+
 #include <sys/socket.h>
 #include <netdb.h>
 #include <arpa/inet.h>
@@ -23,15 +25,11 @@ int main(int argc, char *argv[]) {
     memset(&recPacket, 0, sizeof(struct sntpPacket));
 
 
-/*
-    sendPacket.LI = 0;
-    sendPacket.VN = 4;
-    sendPacket.mode = 3;
-*/
-
 //set flags
 
-    *((uint8_t *) &sendPacket) = 0x1b;
+    sendPacket.LI = 0;
+    sendPacket.VN = 4;
+    sendPacket.MODE = 3;
 
     int sockfd;
 
@@ -41,9 +39,9 @@ int main(int argc, char *argv[]) {
 
     // THIS IS TEMPORARY, REMOVE ON RELEASE
     //char hn[10] = "localhost";
-    char hn[18] = "0.uk.pool.ntp.org";
+    //char hn[18] = "0.uk.pool.ntp.org";
 
-/*  Loop for hostname selection
+/*  Loop for hostname selection */
 
     int c;
     int count;
@@ -56,7 +54,7 @@ int main(int argc, char *argv[]) {
     }
     hn[count] = '\0';
 
-*/
+
 
     if ((he = gethostbyname(hn)) == NULL) {
         perror("SNTP gethostbyname error");
@@ -90,7 +88,7 @@ int main(int argc, char *argv[]) {
 
 //send packet
     if ((sendto(sockfd, &sendPacket, sizeof(sendPacket), 0,
-                                 (struct sockaddr *) &their_addr, sizeof(struct sockaddr))) == -1) {
+                (struct sockaddr *) &their_addr, sizeof(struct sockaddr))) == -1) {
         perror("SNTP sendto error");
         exit(1);
     }
@@ -103,7 +101,7 @@ int main(int argc, char *argv[]) {
 //listen for response
 
     if ((recvfrom(sockfd, &recPacket, sizeof(recPacket), 0,
-                                   (struct sockaddr *) &their_addr, &addr_len)) == -1) {
+                  (struct sockaddr *) &their_addr, &addr_len)) == -1) {
         perror("SNTP recvfrom error");
         exit(1);
     }
@@ -112,43 +110,43 @@ int main(int argc, char *argv[]) {
 
 //change byte order
 
-originntp.second = ntohl(recPacket.origin_ts_sec);
-originntp.fraction = ntohl(recPacket.origin_ts_frac);
+    originntp.second = ntohl(recPacket.origin_ts_sec);
+    originntp.fraction = ntohl(recPacket.origin_ts_frac);
 
-transmitntp.second = ntohl(recPacket.trans_ts_sec);
-transmitntp.fraction = ntohl(recPacket.trans_ts_frac);
+    transmitntp.second = ntohl(recPacket.trans_ts_sec);
+    transmitntp.fraction = ntohl(recPacket.trans_ts_frac);
 
-receiventp.second = ntohl(recPacket.recv_ts_sec);
-receiventp.fraction = ntohl(recPacket.recv_ts_frac);
+    receiventp.second = ntohl(recPacket.recv_ts_sec);
+    receiventp.fraction = ntohl(recPacket.recv_ts_frac);
 
 
-ntp_time_to_unix_time(&originntp, &origintv);
+    ntp_time_to_unix_time(&originntp, &origintv);
 
-ntp_time_to_unix_time(&transmitntp, &transmittv);
+    ntp_time_to_unix_time(&transmitntp, &transmittv);
 
-ntp_time_to_unix_time(&receiventp, &receivetv);
+    ntp_time_to_unix_time(&receiventp, &receivetv);
 
 //DELAY--------------------------------------------
 
-double dSec, dUsec;
+    double dSec, dUsec;
     dSec = ((double) arrival.tv_sec - (double) origintv.tv_sec) -
-               ((double) transmittv.tv_sec - (double) receivetv.tv_sec);
+           ((double) transmittv.tv_sec - (double) receivetv.tv_sec);
     dUsec = ((double) arrival.tv_usec - (double) origintv.tv_usec) -
-                    ((double) transmittv.tv_usec - (double) receivetv.tv_usec);
+            ((double) transmittv.tv_usec - (double) receivetv.tv_usec);
 
-double dTotal = dSec + (dUsec / 1000000);
+    double dTotal = dSec + (dUsec / 1000000);
 
 //------------------------------------------------------
 
 //OFFSET------------------------------------------------
 
-double oSec, oUsec;
+    double oSec, oUsec;
     oSec = ((double) receivetv.tv_sec - (double) origintv.tv_sec) +
-                ((double) transmittv.tv_sec - (double) arrival.tv_sec) / 2;
+           ((double) transmittv.tv_sec - (double) arrival.tv_sec) / 2;
     oUsec = ((double) receivetv.tv_usec - (double) origintv.tv_usec) +
-                     ((double) transmittv.tv_usec - (double) arrival.tv_usec) / 2;
+            ((double) transmittv.tv_usec - (double) arrival.tv_usec) / 2;
 
-double oTotal = oSec + (oUsec / 1000000);
+    double oTotal = oSec + (oUsec / 1000000);
 
 //------------------------------------------------------
 
@@ -168,3 +166,4 @@ double oTotal = oSec + (oUsec / 1000000);
     close(sockfd);
     return 0;
 }
+

@@ -1,0 +1,1 @@
+/usr/lib64/ccache/cc  -g   CMakeFiles/dummyclient.dir/src/server/dummy-client.c.o  -o dummyclient 
