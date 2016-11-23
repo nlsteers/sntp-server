@@ -157,7 +157,7 @@ int main(int argc, char *argv[]) {
         ntp_time_to_unix_time(&ntp, &tv);
 
 //convert to human readable
-        print_unix_to_hr(&tv);
+        print_timestamp(&tv);
         printf("+ %f +/- %f %s(%s)\n", oTotal, dTotal, hn, inet_ntoa(their_addr.sin_addr));
     }
 

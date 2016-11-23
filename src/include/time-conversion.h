@@ -35,8 +35,45 @@ void get_time(struct timeval *tv) {
 }
 
 
-void print_unix_to_hr(struct timeval *tv) {
+void print_timestamp(struct timeval *tv) {
     time_t t2 = (time_t) tv->tv_sec;
+    uint32_t milliseconds = (uint32_t) (tv->tv_usec / 1);
+    struct tm *tm_info;
+    tm_info = localtime(&t2);
+    char b1[200];
+    char b2[100];
+    char b3[100];
+
+    sprintf(b2, "%u", milliseconds);
+    strftime(b1, 50, "%Y-%m-%d %H:%M:%S.", tm_info);
+
+    strftime(b3, 10, " (%z)", tm_info);
+    strcat(b1, b2);
+    strcat(b1, b3);
+    printf("%s ", b1);
+}
+
+
+void print_leap_positive_timestamp(struct timeval *tv) {
+    time_t t2 = (time_t) (tv->tv_sec + 1);
+    uint32_t milliseconds = (uint32_t) (tv->tv_usec / 1);
+    struct tm *tm_info;
+    tm_info = localtime(&t2);
+    char b1[200];
+    char b2[100];
+    char b3[100];
+
+    sprintf(b2, "%u", milliseconds);
+    strftime(b1, 50, "%Y-%m-%d %H:%M:%S.", tm_info);
+
+    strftime(b3, 10, " (%z)", tm_info);
+    strcat(b1, b2);
+    strcat(b1, b3);
+    printf("%s ", b1);
+}
+
+void print_leap_negative_timestamp(struct timeval *tv) {
+    time_t t2 = (time_t) (tv->tv_sec - 1);
     uint32_t milliseconds = (uint32_t) (tv->tv_usec / 1);
     struct tm *tm_info;
     tm_info = localtime(&t2);

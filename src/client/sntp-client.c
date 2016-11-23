@@ -160,8 +160,26 @@ int main(int argc, char *argv[]) {
     ntp_time_to_unix_time(&ntp, &tv);
 
 //convert to human readable
-    print_unix_to_hr(&tv);
-    printf("+ %f +/- %f %s(%s)\n", oTotal, dTotal, hn, inet_ntoa(their_addr.sin_addr));
+
+
+    if (recPacket.LI == 0) {
+        print_timestamp(&tv);
+        printf("+ %f +/- %f %s(%s) s%u no-leap\n", oTotal, dTotal, hn, inet_ntoa(their_addr.sin_addr), recPacket.stratum);
+    }
+
+    if (recPacket.LI == 1) {
+        print_leap_positive_timestamp(&tv);
+        printf("+ %f +/- %f %s(%s) s%u leap-minute +1seconds\n", oTotal, dTotal, hn, inet_ntoa(their_addr.sin_addr), recPacket.stratum);
+    }
+
+    if (recPacket.LI == 2) {
+        print_leap_negative_timestamp(&tv);
+        printf("+ %f +/- %f %s(%s) s%u leap-minute -1seconds\n", oTotal, dTotal, hn, inet_ntoa(their_addr.sin_addr), recPacket.stratum);
+    }
+
+    if (recPacket.LI == 3) {
+        printf("Server clock not synchronized, dropping packet\n");
+    }
 
     close(sockfd);
     return 0;
