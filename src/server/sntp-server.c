@@ -10,6 +10,9 @@
 #include "../include/time-conversion.h"
 
 #define MYPORT 4950
+#define SNTP_GROUP "224.0.1.1"
+
+
 
 
 /* the port users connect to */
