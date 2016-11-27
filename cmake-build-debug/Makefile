@@ -39,19 +39,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/netlab/nlsteers/Documents/clion-2016.3/bin/cmake/bin/cmake
+CMAKE_COMMAND = "/Users/nlsteers/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/163.7743.47/CLion.app/Contents/bin/cmake/bin/cmake"
 
 # The command to remove a file.
-RM = /home/netlab/nlsteers/Documents/clion-2016.3/bin/cmake/bin/cmake -E remove -f
+RM = "/Users/nlsteers/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/163.7743.47/CLion.app/Contents/bin/cmake/bin/cmake" -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework
+CMAKE_SOURCE_DIR = "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug
+CMAKE_BINARY_DIR = "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug"
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/home/netlab/nlsteers/Documents/clion-2016.3/bin/cmake/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	"/Users/nlsteers/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/163.7743.47/CLion.app/Contents/bin/cmake/bin/cmake" -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -70,7 +70,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/home/netlab/nlsteers/Documents/clion-2016.3/bin/cmake/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	"/Users/nlsteers/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/163.7743.47/CLion.app/Contents/bin/cmake/bin/cmake" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -78,11 +78,55 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	"/Users/nlsteers/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/163.7743.47/CLion.app/Contents/bin/cmake/bin/cmake" -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	"/Users/nlsteers/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/163.7743.47/CLion.app/Contents/bin/cmake/bin/cmake" -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	"/Users/nlsteers/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/163.7743.47/CLion.app/Contents/bin/cmake/bin/cmake" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: install/strip
+
+.PHONY : install/strip/fast
+
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	"/Users/nlsteers/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/163.7743.47/CLion.app/Contents/bin/cmake/bin/cmake" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: install/local
+
+.PHONY : install/local/fast
+
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/CMakeFiles" "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/CMakeFiles/progress.marks"
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/CMakeFiles" 0
 .PHONY : all
 
 # The main clean target
@@ -111,17 +155,30 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named dummyclient
+# Target rules for targets named client
 
 # Build rule for target.
-dummyclient: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 dummyclient
-.PHONY : dummyclient
+client: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 client
+.PHONY : client
 
 # fast build rule for target.
-dummyclient/fast:
-	$(MAKE) -f CMakeFiles/dummyclient.dir/build.make CMakeFiles/dummyclient.dir/build
-.PHONY : dummyclient/fast
+client/fast:
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/build
+.PHONY : client/fast
+
+#=============================================================================
+# Target rules for targets named multicast-server
+
+# Build rule for target.
+multicast-server: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 multicast-server
+.PHONY : multicast-server
+
+# fast build rule for target.
+multicast-server/fast:
+	$(MAKE) -f CMakeFiles/multicast-server.dir/build.make CMakeFiles/multicast-server.dir/build
+.PHONY : multicast-server/fast
 
 #=============================================================================
 # Target rules for targets named server
@@ -137,17 +194,56 @@ server/fast:
 .PHONY : server/fast
 
 #=============================================================================
-# Target rules for targets named client
+# Target rules for targets named multicast-client
 
 # Build rule for target.
-client: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 client
-.PHONY : client
+multicast-client: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 multicast-client
+.PHONY : multicast-client
 
 # fast build rule for target.
-client/fast:
-	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/build
-.PHONY : client/fast
+multicast-client/fast:
+	$(MAKE) -f CMakeFiles/multicast-client.dir/build.make CMakeFiles/multicast-client.dir/build
+.PHONY : multicast-client/fast
+
+#=============================================================================
+# Target rules for targets named gtest_main
+
+# Build rule for target.
+gtest_main: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gtest_main
+.PHONY : gtest_main
+
+# fast build rule for target.
+gtest_main/fast:
+	$(MAKE) -f src/tests/lib/googletest/CMakeFiles/gtest_main.dir/build.make src/tests/lib/googletest/CMakeFiles/gtest_main.dir/build
+.PHONY : gtest_main/fast
+
+#=============================================================================
+# Target rules for targets named gtest
+
+# Build rule for target.
+gtest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gtest
+.PHONY : gtest
+
+# fast build rule for target.
+gtest/fast:
+	$(MAKE) -f src/tests/lib/googletest/CMakeFiles/gtest.dir/build.make src/tests/lib/googletest/CMakeFiles/gtest.dir/build
+.PHONY : gtest/fast
+
+#=============================================================================
+# Target rules for targets named runBasicTests
+
+# Build rule for target.
+runBasicTests: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 runBasicTests
+.PHONY : runBasicTests
+
+# fast build rule for target.
+runBasicTests/fast:
+	$(MAKE) -f src/tests/test-code/CMakeFiles/runBasicTests.dir/build.make src/tests/test-code/CMakeFiles/runBasicTests.dir/build
+.PHONY : runBasicTests/fast
 
 src/client/sntp-client.o: src/client/sntp-client.c.o
 
@@ -176,32 +272,59 @@ src/client/sntp-client.c.s:
 	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/sntp-client.c.s
 .PHONY : src/client/sntp-client.c.s
 
-src/server/dummy-client.o: src/server/dummy-client.c.o
+src/client/sntp-multicast-client.o: src/client/sntp-multicast-client.c.o
 
-.PHONY : src/server/dummy-client.o
+.PHONY : src/client/sntp-multicast-client.o
 
 # target to build an object file
-src/server/dummy-client.c.o:
-	$(MAKE) -f CMakeFiles/dummyclient.dir/build.make CMakeFiles/dummyclient.dir/src/server/dummy-client.c.o
-.PHONY : src/server/dummy-client.c.o
+src/client/sntp-multicast-client.c.o:
+	$(MAKE) -f CMakeFiles/multicast-client.dir/build.make CMakeFiles/multicast-client.dir/src/client/sntp-multicast-client.c.o
+.PHONY : src/client/sntp-multicast-client.c.o
 
-src/server/dummy-client.i: src/server/dummy-client.c.i
+src/client/sntp-multicast-client.i: src/client/sntp-multicast-client.c.i
 
-.PHONY : src/server/dummy-client.i
+.PHONY : src/client/sntp-multicast-client.i
 
 # target to preprocess a source file
-src/server/dummy-client.c.i:
-	$(MAKE) -f CMakeFiles/dummyclient.dir/build.make CMakeFiles/dummyclient.dir/src/server/dummy-client.c.i
-.PHONY : src/server/dummy-client.c.i
+src/client/sntp-multicast-client.c.i:
+	$(MAKE) -f CMakeFiles/multicast-client.dir/build.make CMakeFiles/multicast-client.dir/src/client/sntp-multicast-client.c.i
+.PHONY : src/client/sntp-multicast-client.c.i
 
-src/server/dummy-client.s: src/server/dummy-client.c.s
+src/client/sntp-multicast-client.s: src/client/sntp-multicast-client.c.s
 
-.PHONY : src/server/dummy-client.s
+.PHONY : src/client/sntp-multicast-client.s
 
 # target to generate assembly for a file
-src/server/dummy-client.c.s:
-	$(MAKE) -f CMakeFiles/dummyclient.dir/build.make CMakeFiles/dummyclient.dir/src/server/dummy-client.c.s
-.PHONY : src/server/dummy-client.c.s
+src/client/sntp-multicast-client.c.s:
+	$(MAKE) -f CMakeFiles/multicast-client.dir/build.make CMakeFiles/multicast-client.dir/src/client/sntp-multicast-client.c.s
+.PHONY : src/client/sntp-multicast-client.c.s
+
+src/server/sntp-multicast-server.o: src/server/sntp-multicast-server.c.o
+
+.PHONY : src/server/sntp-multicast-server.o
+
+# target to build an object file
+src/server/sntp-multicast-server.c.o:
+	$(MAKE) -f CMakeFiles/multicast-server.dir/build.make CMakeFiles/multicast-server.dir/src/server/sntp-multicast-server.c.o
+.PHONY : src/server/sntp-multicast-server.c.o
+
+src/server/sntp-multicast-server.i: src/server/sntp-multicast-server.c.i
+
+.PHONY : src/server/sntp-multicast-server.i
+
+# target to preprocess a source file
+src/server/sntp-multicast-server.c.i:
+	$(MAKE) -f CMakeFiles/multicast-server.dir/build.make CMakeFiles/multicast-server.dir/src/server/sntp-multicast-server.c.i
+.PHONY : src/server/sntp-multicast-server.c.i
+
+src/server/sntp-multicast-server.s: src/server/sntp-multicast-server.c.s
+
+.PHONY : src/server/sntp-multicast-server.s
+
+# target to generate assembly for a file
+src/server/sntp-multicast-server.c.s:
+	$(MAKE) -f CMakeFiles/multicast-server.dir/build.make CMakeFiles/multicast-server.dir/src/server/sntp-multicast-server.c.s
+.PHONY : src/server/sntp-multicast-server.c.s
 
 src/server/sntp-server.o: src/server/sntp-server.c.o
 
@@ -238,15 +361,26 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... dummyclient"
-	@echo "... server"
+	@echo "... list_install_components"
+	@echo "... install"
+	@echo "... install/strip"
 	@echo "... client"
+	@echo "... install/local"
+	@echo "... multicast-server"
+	@echo "... server"
+	@echo "... multicast-client"
+	@echo "... gtest_main"
+	@echo "... gtest"
+	@echo "... runBasicTests"
 	@echo "... src/client/sntp-client.o"
 	@echo "... src/client/sntp-client.i"
 	@echo "... src/client/sntp-client.s"
-	@echo "... src/server/dummy-client.o"
-	@echo "... src/server/dummy-client.i"
-	@echo "... src/server/dummy-client.s"
+	@echo "... src/client/sntp-multicast-client.o"
+	@echo "... src/client/sntp-multicast-client.i"
+	@echo "... src/client/sntp-multicast-client.s"
+	@echo "... src/server/sntp-multicast-server.o"
+	@echo "... src/server/sntp-multicast-server.i"
+	@echo "... src/server/sntp-multicast-server.s"
 	@echo "... src/server/sntp-server.o"
 	@echo "... src/server/sntp-server.i"
 	@echo "... src/server/sntp-server.s"

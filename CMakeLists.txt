@@ -11,10 +11,21 @@ set(SERVER_FILES
         src/server/sntp-server.c
         src/include/sntp-packet.h src/include/ntp-time.h src/include/time-conversion.h)
 
-set(DUMMYCLIENT_FILES
-        src/server/dummy-client.c
+set(MULTICASTCLIENT_FILES
+        src/client/sntp-multicast-client.c
         src/include/sntp-packet.h src/include/ntp-time.h src/include/time-conversion.h)
+
+set(MULTICASTSERVER_FILES
+        src/server/sntp-multicast-server.c
+        src/include/sntp-packet.h src/include/ntp-time.h src/include/time-conversion.h)
+
 
 add_executable(client ${CLIENT_FILES})
 add_executable(server ${SERVER_FILES})
-add_executable(dummyclient ${DUMMYCLIENT_FILES})
+add_executable(multicast-client ${MULTICASTCLIENT_FILES})
+add_executable(multicast-server ${MULTICASTSERVER_FILES})
+
+include_directories(src)
+add_subdirectory(src/tests)
+
+

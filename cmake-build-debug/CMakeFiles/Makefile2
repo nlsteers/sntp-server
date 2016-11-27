@@ -45,54 +45,91 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/netlab/nlsteers/Documents/clion-2016.3/bin/cmake/bin/cmake
+CMAKE_COMMAND = "/Users/nlsteers/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/163.7743.47/CLion.app/Contents/bin/cmake/bin/cmake"
 
 # The command to remove a file.
-RM = /home/netlab/nlsteers/Documents/clion-2016.3/bin/cmake/bin/cmake -E remove -f
+RM = "/Users/nlsteers/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/163.7743.47/CLion.app/Contents/bin/cmake/bin/cmake" -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework
+CMAKE_SOURCE_DIR = "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug
+CMAKE_BINARY_DIR = "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug"
 
 #=============================================================================
-# Target rules for target CMakeFiles/dummyclient.dir
+# Target rules for target CMakeFiles/client.dir
 
 # All Build rule for target.
-CMakeFiles/dummyclient.dir/all:
-	$(MAKE) -f CMakeFiles/dummyclient.dir/build.make CMakeFiles/dummyclient.dir/depend
-	$(MAKE) -f CMakeFiles/dummyclient.dir/build.make CMakeFiles/dummyclient.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles --progress-num=3,4 "Built target dummyclient"
-.PHONY : CMakeFiles/dummyclient.dir/all
+CMakeFiles/client.dir/all:
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/depend
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/CMakeFiles" --progress-num=1,2 "Built target client"
+.PHONY : CMakeFiles/client.dir/all
 
 # Include target in all.
-all: CMakeFiles/dummyclient.dir/all
+all: CMakeFiles/client.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/dummyclient.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/dummyclient.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles 0
-.PHONY : CMakeFiles/dummyclient.dir/rule
+CMakeFiles/client.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/CMakeFiles" 2
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/client.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/CMakeFiles" 0
+.PHONY : CMakeFiles/client.dir/rule
 
 # Convenience name for target.
-dummyclient: CMakeFiles/dummyclient.dir/rule
+client: CMakeFiles/client.dir/rule
 
-.PHONY : dummyclient
-
-# clean rule for target.
-CMakeFiles/dummyclient.dir/clean:
-	$(MAKE) -f CMakeFiles/dummyclient.dir/build.make CMakeFiles/dummyclient.dir/clean
-.PHONY : CMakeFiles/dummyclient.dir/clean
+.PHONY : client
 
 # clean rule for target.
-clean: CMakeFiles/dummyclient.dir/clean
+CMakeFiles/client.dir/clean:
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/clean
+.PHONY : CMakeFiles/client.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/client.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/multicast-server.dir
+
+# All Build rule for target.
+CMakeFiles/multicast-server.dir/all:
+	$(MAKE) -f CMakeFiles/multicast-server.dir/build.make CMakeFiles/multicast-server.dir/depend
+	$(MAKE) -f CMakeFiles/multicast-server.dir/build.make CMakeFiles/multicast-server.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/CMakeFiles" --progress-num=9,10 "Built target multicast-server"
+.PHONY : CMakeFiles/multicast-server.dir/all
+
+# Include target in all.
+all: CMakeFiles/multicast-server.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/multicast-server.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/CMakeFiles" 2
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/multicast-server.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/CMakeFiles" 0
+.PHONY : CMakeFiles/multicast-server.dir/rule
+
+# Convenience name for target.
+multicast-server: CMakeFiles/multicast-server.dir/rule
+
+.PHONY : multicast-server
+
+# clean rule for target.
+CMakeFiles/multicast-server.dir/clean:
+	$(MAKE) -f CMakeFiles/multicast-server.dir/build.make CMakeFiles/multicast-server.dir/clean
+.PHONY : CMakeFiles/multicast-server.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/multicast-server.dir/clean
 
 .PHONY : clean
 
@@ -103,7 +140,7 @@ clean: CMakeFiles/dummyclient.dir/clean
 CMakeFiles/server.dir/all:
 	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/depend
 	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles --progress-num=5,6 "Built target server"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/CMakeFiles" --progress-num=13,14 "Built target server"
 .PHONY : CMakeFiles/server.dir/all
 
 # Include target in all.
@@ -113,9 +150,9 @@ all: CMakeFiles/server.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/server.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/CMakeFiles" 2
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/server.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/CMakeFiles" 0
 .PHONY : CMakeFiles/server.dir/rule
 
 # Convenience name for target.
@@ -134,39 +171,210 @@ clean: CMakeFiles/server.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/client.dir
+# Target rules for target CMakeFiles/multicast-client.dir
 
 # All Build rule for target.
-CMakeFiles/client.dir/all:
-	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/depend
-	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target client"
-.PHONY : CMakeFiles/client.dir/all
+CMakeFiles/multicast-client.dir/all:
+	$(MAKE) -f CMakeFiles/multicast-client.dir/build.make CMakeFiles/multicast-client.dir/depend
+	$(MAKE) -f CMakeFiles/multicast-client.dir/build.make CMakeFiles/multicast-client.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/CMakeFiles" --progress-num=7,8 "Built target multicast-client"
+.PHONY : CMakeFiles/multicast-client.dir/all
 
 # Include target in all.
-all: CMakeFiles/client.dir/all
+all: CMakeFiles/multicast-client.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/client.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/client.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles 0
-.PHONY : CMakeFiles/client.dir/rule
+CMakeFiles/multicast-client.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/CMakeFiles" 2
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/multicast-client.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/CMakeFiles" 0
+.PHONY : CMakeFiles/multicast-client.dir/rule
 
 # Convenience name for target.
-client: CMakeFiles/client.dir/rule
+multicast-client: CMakeFiles/multicast-client.dir/rule
 
-.PHONY : client
-
-# clean rule for target.
-CMakeFiles/client.dir/clean:
-	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/clean
-.PHONY : CMakeFiles/client.dir/clean
+.PHONY : multicast-client
 
 # clean rule for target.
-clean: CMakeFiles/client.dir/clean
+CMakeFiles/multicast-client.dir/clean:
+	$(MAKE) -f CMakeFiles/multicast-client.dir/build.make CMakeFiles/multicast-client.dir/clean
+.PHONY : CMakeFiles/multicast-client.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/multicast-client.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory src/tests
+
+# Convenience name for "all" pass in the directory.
+src/tests/all: src/tests/lib/googletest/all
+src/tests/all: src/tests/test-code/all
+
+.PHONY : src/tests/all
+
+# Convenience name for "clean" pass in the directory.
+src/tests/clean: src/tests/lib/googletest/clean
+src/tests/clean: src/tests/test-code/clean
+
+.PHONY : src/tests/clean
+
+# Convenience name for "preinstall" pass in the directory.
+src/tests/preinstall: src/tests/lib/googletest/preinstall
+src/tests/preinstall: src/tests/test-code/preinstall
+
+.PHONY : src/tests/preinstall
+
+#=============================================================================
+# Directory level rules for directory src/tests/lib/googletest
+
+# Convenience name for "all" pass in the directory.
+src/tests/lib/googletest/all: src/tests/lib/googletest/CMakeFiles/gtest_main.dir/all
+src/tests/lib/googletest/all: src/tests/lib/googletest/CMakeFiles/gtest.dir/all
+
+.PHONY : src/tests/lib/googletest/all
+
+# Convenience name for "clean" pass in the directory.
+src/tests/lib/googletest/clean: src/tests/lib/googletest/CMakeFiles/gtest_main.dir/clean
+src/tests/lib/googletest/clean: src/tests/lib/googletest/CMakeFiles/gtest.dir/clean
+
+.PHONY : src/tests/lib/googletest/clean
+
+# Convenience name for "preinstall" pass in the directory.
+src/tests/lib/googletest/preinstall:
+
+.PHONY : src/tests/lib/googletest/preinstall
+
+#=============================================================================
+# Target rules for target src/tests/lib/googletest/CMakeFiles/gtest_main.dir
+
+# All Build rule for target.
+src/tests/lib/googletest/CMakeFiles/gtest_main.dir/all: src/tests/lib/googletest/CMakeFiles/gtest.dir/all
+	$(MAKE) -f src/tests/lib/googletest/CMakeFiles/gtest_main.dir/build.make src/tests/lib/googletest/CMakeFiles/gtest_main.dir/depend
+	$(MAKE) -f src/tests/lib/googletest/CMakeFiles/gtest_main.dir/build.make src/tests/lib/googletest/CMakeFiles/gtest_main.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/CMakeFiles" --progress-num=5,6 "Built target gtest_main"
+.PHONY : src/tests/lib/googletest/CMakeFiles/gtest_main.dir/all
+
+# Include target in all.
+all: src/tests/lib/googletest/CMakeFiles/gtest_main.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+src/tests/lib/googletest/CMakeFiles/gtest_main.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/CMakeFiles" 4
+	$(MAKE) -f CMakeFiles/Makefile2 src/tests/lib/googletest/CMakeFiles/gtest_main.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/CMakeFiles" 0
+.PHONY : src/tests/lib/googletest/CMakeFiles/gtest_main.dir/rule
+
+# Convenience name for target.
+gtest_main: src/tests/lib/googletest/CMakeFiles/gtest_main.dir/rule
+
+.PHONY : gtest_main
+
+# clean rule for target.
+src/tests/lib/googletest/CMakeFiles/gtest_main.dir/clean:
+	$(MAKE) -f src/tests/lib/googletest/CMakeFiles/gtest_main.dir/build.make src/tests/lib/googletest/CMakeFiles/gtest_main.dir/clean
+.PHONY : src/tests/lib/googletest/CMakeFiles/gtest_main.dir/clean
+
+# clean rule for target.
+clean: src/tests/lib/googletest/CMakeFiles/gtest_main.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target src/tests/lib/googletest/CMakeFiles/gtest.dir
+
+# All Build rule for target.
+src/tests/lib/googletest/CMakeFiles/gtest.dir/all:
+	$(MAKE) -f src/tests/lib/googletest/CMakeFiles/gtest.dir/build.make src/tests/lib/googletest/CMakeFiles/gtest.dir/depend
+	$(MAKE) -f src/tests/lib/googletest/CMakeFiles/gtest.dir/build.make src/tests/lib/googletest/CMakeFiles/gtest.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/CMakeFiles" --progress-num=3,4 "Built target gtest"
+.PHONY : src/tests/lib/googletest/CMakeFiles/gtest.dir/all
+
+# Include target in all.
+all: src/tests/lib/googletest/CMakeFiles/gtest.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+src/tests/lib/googletest/CMakeFiles/gtest.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/CMakeFiles" 2
+	$(MAKE) -f CMakeFiles/Makefile2 src/tests/lib/googletest/CMakeFiles/gtest.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/CMakeFiles" 0
+.PHONY : src/tests/lib/googletest/CMakeFiles/gtest.dir/rule
+
+# Convenience name for target.
+gtest: src/tests/lib/googletest/CMakeFiles/gtest.dir/rule
+
+.PHONY : gtest
+
+# clean rule for target.
+src/tests/lib/googletest/CMakeFiles/gtest.dir/clean:
+	$(MAKE) -f src/tests/lib/googletest/CMakeFiles/gtest.dir/build.make src/tests/lib/googletest/CMakeFiles/gtest.dir/clean
+.PHONY : src/tests/lib/googletest/CMakeFiles/gtest.dir/clean
+
+# clean rule for target.
+clean: src/tests/lib/googletest/CMakeFiles/gtest.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory src/tests/test-code
+
+# Convenience name for "all" pass in the directory.
+src/tests/test-code/all: src/tests/test-code/CMakeFiles/runBasicTests.dir/all
+
+.PHONY : src/tests/test-code/all
+
+# Convenience name for "clean" pass in the directory.
+src/tests/test-code/clean: src/tests/test-code/CMakeFiles/runBasicTests.dir/clean
+
+.PHONY : src/tests/test-code/clean
+
+# Convenience name for "preinstall" pass in the directory.
+src/tests/test-code/preinstall:
+
+.PHONY : src/tests/test-code/preinstall
+
+#=============================================================================
+# Target rules for target src/tests/test-code/CMakeFiles/runBasicTests.dir
+
+# All Build rule for target.
+src/tests/test-code/CMakeFiles/runBasicTests.dir/all: src/tests/lib/googletest/CMakeFiles/gtest_main.dir/all
+src/tests/test-code/CMakeFiles/runBasicTests.dir/all: src/tests/lib/googletest/CMakeFiles/gtest.dir/all
+	$(MAKE) -f src/tests/test-code/CMakeFiles/runBasicTests.dir/build.make src/tests/test-code/CMakeFiles/runBasicTests.dir/depend
+	$(MAKE) -f src/tests/test-code/CMakeFiles/runBasicTests.dir/build.make src/tests/test-code/CMakeFiles/runBasicTests.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/CMakeFiles" --progress-num=11,12 "Built target runBasicTests"
+.PHONY : src/tests/test-code/CMakeFiles/runBasicTests.dir/all
+
+# Include target in all.
+all: src/tests/test-code/CMakeFiles/runBasicTests.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+src/tests/test-code/CMakeFiles/runBasicTests.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/CMakeFiles" 6
+	$(MAKE) -f CMakeFiles/Makefile2 src/tests/test-code/CMakeFiles/runBasicTests.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/CMakeFiles" 0
+.PHONY : src/tests/test-code/CMakeFiles/runBasicTests.dir/rule
+
+# Convenience name for target.
+runBasicTests: src/tests/test-code/CMakeFiles/runBasicTests.dir/rule
+
+.PHONY : runBasicTests
+
+# clean rule for target.
+src/tests/test-code/CMakeFiles/runBasicTests.dir/clean:
+	$(MAKE) -f src/tests/test-code/CMakeFiles/runBasicTests.dir/build.make src/tests/test-code/CMakeFiles/runBasicTests.dir/clean
+.PHONY : src/tests/test-code/CMakeFiles/runBasicTests.dir/clean
+
+# clean rule for target.
+clean: src/tests/test-code/CMakeFiles/runBasicTests.dir/clean
 
 .PHONY : clean
 

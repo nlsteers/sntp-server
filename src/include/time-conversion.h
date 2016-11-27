@@ -130,10 +130,8 @@ void print_network_packet(struct sntpPacket *sntp) {
 
 
 
-
 void get_reference_time(struct sntpPacket *sendPacket) {
 
-    printf("0\n");
 
     struct sntpPacket referencePacket;
     struct ntp_time_t ntp = {0};
@@ -141,7 +139,6 @@ void get_reference_time(struct sntpPacket *sendPacket) {
 
     memset(&referencePacket, 0, sizeof(struct sntpPacket));
 
-    printf("1\n");
 
 //set flags
 
@@ -149,23 +146,28 @@ void get_reference_time(struct sntpPacket *sendPacket) {
     referencePacket.VN = 4;
     referencePacket.MODE = 3;
 
-    int sockfd;
+    int sockfd, error;
 
     socklen_t addr_len;
     struct hostent *he;
     struct sockaddr_in their_addr;
 
-    char hn[14] = "ntp.uwe.ac.uk";
 
-    printf("2\n");
+    char hn[18] = "0.uk.pool.ntp.org";
+
+    error = 0;
+
     if ((he = gethostbyname(hn)) == NULL) {
-        perror("SNTP gethostbyname error");
-        exit(1);
+        perror("Error resolving reference hostname\n");
+        error = 1;
+        goto ERROR;
     }
     if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) == -1) {
-        perror("SNTP socket error");
-        exit(1);
+        perror("Error setting reference socket\n");
+        error = 1;
+        goto ERROR;
     }
+
 
     memset(&their_addr, 0, sizeof(their_addr));
     /* zero struct */
@@ -177,7 +179,6 @@ void get_reference_time(struct sntpPacket *sendPacket) {
 
 
 //get reference time
-    printf("3\n");
     get_ntp_time(&tv, &ntp);
 
 //change byte order
@@ -190,12 +191,12 @@ void get_reference_time(struct sntpPacket *sendPacket) {
 
 //send packet
 
-    printf("4\n");
 
     if ((sendto(sockfd, &referencePacket, sizeof(referencePacket), 0,
                 (struct sockaddr *) &their_addr, sizeof(struct sockaddr))) == -1) {
-        perror("SNTP sendto error");
-        exit(1);
+        perror("Error sending reference packet\n");
+        error = 1;
+        goto ERROR;
     }
 
 //set address length
@@ -204,26 +205,33 @@ void get_reference_time(struct sntpPacket *sendPacket) {
     memset(&tv, 0, sizeof(struct timeval));
 
 //listen for response
-
-    printf("5\n");
-
     if ((recvfrom(sockfd, &referencePacket, sizeof(referencePacket), 0,
                   (struct sockaddr *) &their_addr, &addr_len)) == -1) {
-        perror("SNTP recvfrom error");
-        exit(1);
+        perror("Error receiving reference packet\n");
+        error = 1;
+        goto ERROR;
     }
 
-    printf("6\n");
-
+//get reference stratum
     uint8_t stratumTemp = referencePacket.stratum;
-
+//update our stratum to ref+1
     stratumTemp++;
-
+//disable sync warnings
+    sendPacket->LI = 0;
+//set reference variables
     sendPacket->ref_ts_sec = referencePacket.trans_ts_sec;
     sendPacket->ref_ts_frac = referencePacket.trans_ts_frac;
     sendPacket->ref_ID = referencePacket.ref_ID;
+//set stratum
     sendPacket->stratum = stratumTemp;
 
+    printf("Reference update succeeded.\nNew NTP time: \nSeconds %u Fractions %u\n", ntohl(sendPacket->ref_ts_sec),
+           ntohl(sendPacket->ref_ts_frac));
+
+    ERROR:
+    if (error == 1) {
+        printf("Failed to update reference time\n");
+    }
 
 }
 
