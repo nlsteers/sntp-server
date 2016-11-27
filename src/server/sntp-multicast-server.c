@@ -8,7 +8,7 @@
 #include <arpa/inet.h>
 #include "../include/time-conversion.h"
 
-#define MYPORT 4950
+#define PORT 4950
 #define SNTP_GROUP "224.0.1.1"
 
 
@@ -26,7 +26,9 @@ int main(void) {
     /* client's address info */
     int addr_len, quit, update, error;
     long tempSeconds, tempFractions;
+    struct ip_mreq multi;
 
+    u_int y = 1;
 
     quit = 1;
     update = 1;
@@ -35,25 +37,45 @@ int main(void) {
     memset(&sendPacket, 0, sizeof(struct sntpPacket));
     memset(&recPacket, 0, sizeof(struct sntpPacket));
 
+
     if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) == -1) {
         perror("Socket error");
         exit(1);
     }
+
+
+    if (setsockopt(sockfd,SOL_SOCKET,SO_REUSEADDR,&y,sizeof(y)) < 0) {
+        perror("Socket reuse error");
+        exit(1);
+    }
+
     memset(&my_addr, 0, sizeof(my_addr));
     /* zero struct */
     my_addr.sin_family = AF_INET;
     /* host byte order ... */
-    my_addr.sin_port = htons(MYPORT);
-    /* ... short, network byte order */
-    my_addr.sin_addr.s_addr = INADDR_ANY;
-    /* any of server IP addrs */
 
+    my_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+
+    my_addr.sin_port = htons(PORT);
+    /* ... short, network byte order */
 
     if (bind(sockfd, (struct sockaddr *) &my_addr,
              sizeof(struct sockaddr)) == -1) {
         perror("Socket bind error");
         exit(1);
     }
+
+    multi.imr_multiaddr.s_addr=inet_addr(SNTP_GROUP);
+    multi.imr_interface.s_addr=htonl(INADDR_ANY);
+    if (setsockopt(sockfd,IPPROTO_IP,IP_ADD_MEMBERSHIP,&multi,sizeof(multi)) < 0) {
+        perror("Error joining multicast group");
+        exit(1);
+    }
+
+
+
+
+
     addr_len = sizeof(struct sockaddr);
 
     sendPacket.LI = 3;
@@ -61,7 +83,7 @@ int main(void) {
     sendPacket.MODE = 4;
     sendPacket.stratum = 1;
 
-    printf("Online...\n");
+    printf("Joined multicast group %s ...\n", SNTP_GROUP);
 
     do {
 

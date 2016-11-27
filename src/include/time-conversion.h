@@ -11,6 +11,7 @@
 #include <time.h>
 #include <sys/time.h>
 #include <arpa/inet.h>
+#include <netdb.h>
 #include "ntp-time.h"
 #include "sntp-packet.h"
 
@@ -135,7 +136,7 @@ void get_reference_time(struct sntpPacket *sendPacket) {
 
     struct sntpPacket referencePacket;
     struct ntp_time_t ntp = {0};
-    struct timeval tv = {0};
+    struct timeval tv, timeout = {0};
 
     memset(&referencePacket, 0, sizeof(struct sntpPacket));
 
@@ -153,7 +154,7 @@ void get_reference_time(struct sntpPacket *sendPacket) {
     struct sockaddr_in their_addr;
 
 
-    char hn[18] = "0.uk.pool.ntp.org";
+    char hn[18] = "3.uk.pool.ntp.org";
 
     error = 0;
 
@@ -168,6 +169,13 @@ void get_reference_time(struct sntpPacket *sendPacket) {
         goto ERROR;
     }
 
+    timeout.tv_sec = 5;
+    timeout.tv_usec = 0;
+
+    if (setsockopt(sockfd, SOL_SOCKET, SO_RCVTIMEO, &timeout, sizeof(timeout)) < 0) {
+        perror("Error setting timeout");
+        exit(1);
+    }
 
     memset(&their_addr, 0, sizeof(their_addr));
     /* zero struct */

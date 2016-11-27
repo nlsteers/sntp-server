@@ -6,11 +6,9 @@ Submission for teaching block 1 CNOS coursework
 
 An implementation of SNTP client and server specified here in [RFC4330](https://tools.ietf.org/html/rfc4330)
 
-
-
 ## Code Example
 
-Show what the library does as concisely as possible, developers should be able to figure out **how** your project solves their problem by looking at the code example. Make sure the API you are showing off is obvious, and that your code is short and concise.
+Coming soon.
 
 ## Installation
 
@@ -18,7 +16,7 @@ Coming soon.
 
 ## Tests
 
-Coming soon.
+The test suite uses the googletest framework to acheive test coverage, load the project into an IDE to run the test suite or run checks.cpp from the command line. Make files should handle the set up.  
 
 ## Contributors
 

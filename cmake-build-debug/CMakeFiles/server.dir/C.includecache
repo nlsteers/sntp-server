@@ -27,6 +27,8 @@ sys/time.h
 -
 arpa/inet.h
 -
+netdb.h
+-
 ntp-time.h
 /Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/src/include/ntp-time.h
 sntp-packet.h
@@ -46,8 +48,6 @@ sys/socket.h
 netinet/in.h
 -
 arpa/inet.h
--
-netdb.h
 -
 ../include/time-conversion.h
 /Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/src/include/time-conversion.h

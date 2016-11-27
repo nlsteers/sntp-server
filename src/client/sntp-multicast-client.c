@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-
 #include <sys/socket.h>
 #include <netdb.h>
 #include <arpa/inet.h>
@@ -10,6 +9,7 @@
 
 #include "../include/time-conversion.h"
 
+#define SNTP_GROUP "224.0.1.1"
 //uint16_t PORT = 123;
 uint16_t PORT = 4950;
 uint16_t POLL = 20;
@@ -27,10 +27,13 @@ int main(int argc, char *argv[]) {
 
     int sockfd, activePolling, i;
 
+    u_int y = 1;
+
     socklen_t addr_len;
 
     struct hostent *he;
     struct sockaddr_in their_addr;
+    struct ip_mreq multi;
 
 
     char hn[256];
@@ -102,13 +105,16 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
+
     memset(&their_addr, 0, sizeof(their_addr));
     /* zero struct */
     their_addr.sin_family = AF_INET;
     /* host byte order .. */
     their_addr.sin_port = htons(PORT);
     /* .. short, netwk byte order */
-    their_addr.sin_addr = *((struct in_addr *) he->h_addr);
+    their_addr.sin_addr.s_addr=inet_addr(SNTP_GROUP);
+
+
 
     activePolling = 1;
 
@@ -134,11 +140,14 @@ int main(int argc, char *argv[]) {
         sendPacket.trans_ts_frac = (uint32_t) tempFractions;
 
 //send packet
+
         if ((sendto(sockfd, &sendPacket, sizeof(sendPacket), 0,
                     (struct sockaddr *) &their_addr, sizeof(struct sockaddr))) == -1) {
             perror("Error sending packet");
             exit(1);
         }
+
+        printf("Sent packet to address %s\n", inet_ntoa(their_addr.sin_addr));
 
 //set address length
         addr_len = sizeof(struct sockaddr_in);
