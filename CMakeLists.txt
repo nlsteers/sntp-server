@@ -1,7 +1,13 @@
 cmake_minimum_required(VERSION 3.6)
 project(sntp_coursework)
 
+
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+
+set(GCC_COVERAGE_LINK_FLAGS "-lm")
+
+add_definitions(${GCC_COVERAGE_LINK_FLAGS})
 
 set(CLIENT_FILES
         src/client/sntp-client.c
@@ -20,10 +26,16 @@ set(MULTICASTSERVER_FILES
         src/include/sntp-packet.h src/include/ntp-time.h src/include/time-conversion.h)
 
 
+
 add_executable(client ${CLIENT_FILES})
 add_executable(server ${SERVER_FILES})
 add_executable(multicast-client ${MULTICASTCLIENT_FILES})
 add_executable(multicast-server ${MULTICASTSERVER_FILES})
+
+target_link_libraries(client m)
+target_link_libraries(server m)
+target_link_libraries(multicast-client m)
+target_link_libraries(multicast-server m)
 
 include_directories(src)
 add_subdirectory(src/tests)

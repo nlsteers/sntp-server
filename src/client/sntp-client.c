@@ -2,15 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-
 #include <sys/socket.h>
 #include <arpa/inet.h>
-#include <math.h>
 
 #include "../include/time-conversion.h"
 
-//uint16_t PORT = 123;
-uint16_t PORT = 4950;
+uint16_t PORT = 123;
+//uint16_t PORT = 4950;
 uint16_t POLL = 20;
 
 
@@ -34,7 +32,7 @@ int main(int argc, char *argv[]) {
 
     char hn[256];
     //strcpy(hn, "0.uk.pool.ntp.org");
-    strcpy(hn, "localhost");
+    strcpy(hn, "kenny");
 
 
     for (i = 1; i < argc; i++) {
@@ -118,7 +116,7 @@ int main(int argc, char *argv[]) {
     sendPacket.LI = 0;
     sendPacket.VN = 4;
     sendPacket.MODE = 3;
-    sendPacket.poll = (uint8_t) log2(POLL);
+    sendPacket.poll = (uint8_t) Log2(POLL);
 
     while (activePolling == 1) {
 

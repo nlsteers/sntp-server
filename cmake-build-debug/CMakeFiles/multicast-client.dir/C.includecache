@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/src/client/sntp-multicast-client.c
+/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/client/sntp-multicast-client.c
 stdio.h
 -
 stdlib.h
@@ -24,17 +24,17 @@ arpa/inet.h
 math.h
 -
 ../include/time-conversion.h
-/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/src/include/time-conversion.h
+/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/include/time-conversion.h
 
-/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/src/include/ntp-time.h
+/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/include/ntp-time.h
 stdint.h
 -
 
-/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/src/include/sntp-packet.h
+/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/include/sntp-packet.h
 stdint.h
 -
 
-/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/src/include/time-conversion.h
+/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/include/time-conversion.h
 stdio.h
 -
 stdint.h
@@ -49,8 +49,10 @@ arpa/inet.h
 -
 netdb.h
 -
+math.h
+-
 ntp-time.h
-/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/src/include/ntp-time.h
+/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/include/ntp-time.h
 sntp-packet.h
-/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/src/include/sntp-packet.h
+/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/include/sntp-packet.h
 

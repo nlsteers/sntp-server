@@ -1,4 +1,4 @@
-# Install script for directory: /Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/src/tests
+# Install script for directory: /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/tests
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -27,10 +27,15 @@ if(NOT CMAKE_INSTALL_COMPONENT)
   endif()
 endif()
 
+# Install shared libraries without execute permission?
+if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
+  set(CMAKE_INSTALL_SO_NO_EXE "0")
+endif()
+
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/src/tests/lib/googletest/cmake_install.cmake")
-  include("/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/src/tests/test-code/cmake_install.cmake")
+  include("/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/src/tests/lib/googletest/cmake_install.cmake")
+  include("/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/src/tests/test-code/cmake_install.cmake")
 
 endif()
 

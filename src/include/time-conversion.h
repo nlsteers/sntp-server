@@ -12,6 +12,7 @@
 #include <sys/time.h>
 #include <arpa/inet.h>
 #include <netdb.h>
+#include <math.h>
 #include "ntp-time.h"
 #include "sntp-packet.h"
 
@@ -129,7 +130,11 @@ void print_network_packet(struct sntpPacket *sntp) {
            ntohl(sntp->trans_ts_frac));
 }
 
-
+double Log2( double n )
+{
+    // log(n)/log(2) is log2.
+    return log( n ) / log( 2 );
+}
 
 void get_reference_time(struct sntpPacket *sendPacket) {
 
@@ -154,7 +159,7 @@ void get_reference_time(struct sntpPacket *sendPacket) {
     struct sockaddr_in their_addr;
 
 
-    char hn[18] = "3.uk.pool.ntp.org";
+    char hn[18] = "ntp.uwe.ac.uk";
 
     error = 0;
 

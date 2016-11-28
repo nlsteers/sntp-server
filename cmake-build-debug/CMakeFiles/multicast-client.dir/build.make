@@ -34,19 +34,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = "/Users/nlsteers/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/163.7743.47/CLion.app/Contents/bin/cmake/bin/cmake"
+CMAKE_COMMAND = /home/netlab/nlsteers/Documents/clion-2016.3/bin/cmake/bin/cmake
 
 # The command to remove a file.
-RM = "/Users/nlsteers/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/163.7743.47/CLion.app/Contents/bin/cmake/bin/cmake" -E remove -f
+RM = /home/netlab/nlsteers/Documents/clion-2016.3/bin/cmake/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework"
+CMAKE_SOURCE_DIR = /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug"
+CMAKE_BINARY_DIR = /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/multicast-client.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/multicast-client.dir/flags.make
 
 CMakeFiles/multicast-client.dir/src/client/sntp-multicast-client.c.o: CMakeFiles/multicast-client.dir/flags.make
 CMakeFiles/multicast-client.dir/src/client/sntp-multicast-client.c.o: ../src/client/sntp-multicast-client.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/multicast-client.dir/src/client/sntp-multicast-client.c.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/multicast-client.dir/src/client/sntp-multicast-client.c.o   -c "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/src/client/sntp-multicast-client.c"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/multicast-client.dir/src/client/sntp-multicast-client.c.o"
+	/usr/lib64/ccache/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/multicast-client.dir/src/client/sntp-multicast-client.c.o   -c /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/client/sntp-multicast-client.c
 
 CMakeFiles/multicast-client.dir/src/client/sntp-multicast-client.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/multicast-client.dir/src/client/sntp-multicast-client.c.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/src/client/sntp-multicast-client.c" > CMakeFiles/multicast-client.dir/src/client/sntp-multicast-client.c.i
+	/usr/lib64/ccache/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/client/sntp-multicast-client.c > CMakeFiles/multicast-client.dir/src/client/sntp-multicast-client.c.i
 
 CMakeFiles/multicast-client.dir/src/client/sntp-multicast-client.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/multicast-client.dir/src/client/sntp-multicast-client.c.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/src/client/sntp-multicast-client.c" -o CMakeFiles/multicast-client.dir/src/client/sntp-multicast-client.c.s
+	/usr/lib64/ccache/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/client/sntp-multicast-client.c -o CMakeFiles/multicast-client.dir/src/client/sntp-multicast-client.c.s
 
 CMakeFiles/multicast-client.dir/src/client/sntp-multicast-client.c.o.requires:
 
@@ -91,7 +91,7 @@ multicast__client_EXTERNAL_OBJECTS =
 multicast-client: CMakeFiles/multicast-client.dir/src/client/sntp-multicast-client.c.o
 multicast-client: CMakeFiles/multicast-client.dir/build.make
 multicast-client: CMakeFiles/multicast-client.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable multicast-client"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable multicast-client"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/multicast-client.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -108,6 +108,6 @@ CMakeFiles/multicast-client.dir/clean:
 .PHONY : CMakeFiles/multicast-client.dir/clean
 
 CMakeFiles/multicast-client.dir/depend:
-	cd "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug" && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework" "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework" "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug" "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug" "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/CMakeFiles/multicast-client.dir/DependInfo.cmake" --color=$(COLOR)
+	cd /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles/multicast-client.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/multicast-client.dir/depend
 
