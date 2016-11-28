@@ -9,7 +9,7 @@
 
 #include "../include/time-conversion.h"
 
-#define SNTP_GROUP "224.0.1.1"
+
 //uint16_t PORT = 123;
 uint16_t PORT = 4950;
 uint16_t POLL = 20;
@@ -125,7 +125,8 @@ int main(int argc, char *argv[]) {
     sendPacket.LI = 0;
     sendPacket.VN = 4;
     sendPacket.MODE = 3;
-    sendPacket.poll = (uint8_t) log2(POLL);
+    sendPacket.poll = (uint8_t) Log2(POLL);
+
 
     while (activePolling == 1) {
 

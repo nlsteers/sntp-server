@@ -13,6 +13,9 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../src"
   "../src/tests/test-code/../lib/googletest/include"
   "../src/tests/test-code/../lib/googletest"
+  "../src/tests/test-code/../../client"
+  "../src/tests/test-code/../../server"
+  "../src/tests/test-code/../../include"
   "../src/tests/lib/googletest/include"
   )
 

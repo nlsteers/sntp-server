@@ -75,7 +75,6 @@ int main(void) {
 
 
 
-
     addr_len = sizeof(struct sockaddr);
 
     sendPacket.LI = 3;

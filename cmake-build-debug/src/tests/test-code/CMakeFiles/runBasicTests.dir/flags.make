@@ -6,5 +6,5 @@ CXX_FLAGS =  -std=c++11 -g   -lm
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src -I/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/tests/test-code/../lib/googletest/include -I/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/tests/test-code/../lib/googletest -I/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/tests/lib/googletest/include 
+CXX_INCLUDES = -I/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src -I/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/tests/test-code/../lib/googletest/include -I/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/tests/test-code/../lib/googletest -I/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/tests/test-code/../../client -I/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/tests/test-code/../../server -I/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/tests/test-code/../../include -I/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/tests/lib/googletest/include 
 

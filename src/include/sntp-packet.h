@@ -6,7 +6,7 @@
 #define SNTP_COURSEWORK_SNTP_PACKET_H
 
 #include <stdint.h>
-
+#define SNTP_GROUP "224.0.1.1"
 struct sntpPacket {
     unsigned MODE:3;
     unsigned VN:3;

@@ -123,6 +123,9 @@
 					<Add directory="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src"/>
 					<Add directory="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/tests/test-code/../lib/googletest/include"/>
 					<Add directory="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/tests/test-code/../lib/googletest"/>
+					<Add directory="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/tests/test-code/../../client"/>
+					<Add directory="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/tests/test-code/../../server"/>
+					<Add directory="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/tests/test-code/../../include"/>
 					<Add directory="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/tests/lib/googletest/include"/>
 					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.9.2/include"/>
 					<Add directory="/usr/local/include"/>
@@ -148,6 +151,9 @@
 					<Add directory="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src"/>
 					<Add directory="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/tests/test-code/../lib/googletest/include"/>
 					<Add directory="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/tests/test-code/../lib/googletest"/>
+					<Add directory="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/tests/test-code/../../client"/>
+					<Add directory="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/tests/test-code/../../server"/>
+					<Add directory="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/tests/test-code/../../include"/>
 					<Add directory="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/tests/lib/googletest/include"/>
 					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.9.2/include"/>
 					<Add directory="/usr/local/include"/>

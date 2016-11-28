@@ -118,6 +118,8 @@ int main(int argc, char *argv[]) {
     sendPacket.MODE = 3;
     sendPacket.poll = (uint8_t) Log2(POLL);
 
+    printf("%lf\n", Log2(POLL));
+
     while (activePolling == 1) {
 
         get_ntp_time(&tv, &ntp);

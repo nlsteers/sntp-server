@@ -143,6 +143,12 @@ void get_reference_time(struct sntpPacket *sendPacket) {
     struct ntp_time_t ntp = {0};
     struct timeval tv, timeout = {0};
 
+    long tempSeconds;
+    long tempFractions;
+
+
+    uint8_t stratumTemp;
+
     memset(&referencePacket, 0, sizeof(struct sntpPacket));
 
 
@@ -196,8 +202,8 @@ void get_reference_time(struct sntpPacket *sendPacket) {
 
 //change byte order
 
-    long tempSeconds = htonl(ntp.second);
-    long tempFractions = htonl(ntp.fraction);
+    tempSeconds = htonl(ntp.second);
+    tempFractions = htonl(ntp.fraction);
 
     referencePacket.trans_ts_sec = (uint32_t) tempSeconds;
     referencePacket.trans_ts_frac = (uint32_t) tempFractions;
@@ -226,7 +232,7 @@ void get_reference_time(struct sntpPacket *sendPacket) {
     }
 
 //get reference stratum
-    uint8_t stratumTemp = referencePacket.stratum;
+    stratumTemp = referencePacket.stratum;
 //update our stratum to ref+1
     stratumTemp++;
 //disable sync warnings
@@ -248,28 +254,6 @@ void get_reference_time(struct sntpPacket *sendPacket) {
 
 }
 
-/*
 
-    // convert unix time to ntp time
-    unix_time_to_ntp_time(&tv, &ntp);
-    printf("NTP Time: %u %u\n", ntp.second, ntp.fraction);
-
-    // convert ntp time back to unix time to see whether they are same
-    ntp_time_to_unix_time(&ntp, &tv);
-    printf("UNIX Time: %ld %ld\n", tv.tv_sec, tv.tv_usec)
-
-
- //print time in milliseconds
-
-    printf("UNIX Time: %ld %ld\n", tv.tv_sec, (long) tv.tv_usec);
-
-    unsigned long long millisecondsSinceEpoch =
-            (unsigned long long) (tv.tv_sec) * 1000 + (unsigned long long) (tv.tv_usec) / 1000;
-
-   printf("Milliseconds since epoch (UNIX) %llu\n\n", millisecondsSinceEpoch);
-
-
-
-*/
 
 #endif //SNTP_COURSEWORK_TIME_CONVERSION_H
