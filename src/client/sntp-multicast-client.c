@@ -40,9 +40,9 @@ int main(int argc, char *argv[]) {
     //strcpy(hn, "0.uk.pool.ntp.org");
     strcpy(hn, "localhost");
 
-
+//iterate through command line arguments
     for (i = 1; i < argc; i++) {
-
+        //show help
         if (strcmp(argv[i], "-help") == 0) {
             printf("Usage: \n\n"
                            "-multicast\n"
@@ -53,12 +53,12 @@ int main(int argc, char *argv[]) {
                            "Use requested hostname\n\n");
             exit(0);
         }
-
+        //enable multicast
         if (strcmp(argv[i], "-multicast") == 0) {
             //multicast = 1;
         }
 
-
+        //change port
         if (strcmp(argv[i], "-port") == 0) {
 
             unsigned short int newPort;
@@ -77,7 +77,7 @@ int main(int argc, char *argv[]) {
             }
 
         }
-
+        //set hostname
         if (strcmp(argv[i], "-host") == 0) {
 
             printf("Enter hostname: ");
@@ -87,7 +87,7 @@ int main(int argc, char *argv[]) {
 
     }
 
-
+    //resolve hostname
     if ((he = gethostbyname(hn)) == NULL) {
         perror("Error setting hostname");
         exit(1);
@@ -99,7 +99,7 @@ int main(int argc, char *argv[]) {
 
     timeout.tv_sec = 5;
     timeout.tv_usec = 0;
-
+//set timeout to 5 seconds
     if (setsockopt(sockfd, SOL_SOCKET, SO_RCVTIMEO, &timeout, sizeof(timeout)) < 0) {
         perror("Error setting timeout");
         exit(1);
@@ -125,7 +125,7 @@ int main(int argc, char *argv[]) {
     sendPacket.LI = 0;
     sendPacket.VN = 4;
     sendPacket.MODE = 3;
-    sendPacket.poll = (uint8_t) Log2(POLL);
+    //sendPacket.poll = (uint8_t) Log2(POLL);
 
 
     while (activePolling == 1) {
@@ -148,7 +148,6 @@ int main(int argc, char *argv[]) {
             exit(1);
         }
 
-        printf("Sent packet to address %s\n", inet_ntoa(their_addr.sin_addr));
 
 //set address length
         addr_len = sizeof(struct sockaddr_in);
@@ -217,10 +216,12 @@ int main(int argc, char *argv[]) {
 
             ntp_time_to_unix_time(&ntp, &tv);
 
-//convert to human readable
+//check LI for leap seconds
 
 
             if (recPacket.LI == 0) {
+                
+                //no leap
                 print_timestamp(&tv);
                 printf("+ %f +/- %f %s(%s) s%u no-leap\n", oTotal, dTotal, hn, inet_ntoa(their_addr.sin_addr),
                        recPacket.stratum);
@@ -228,6 +229,8 @@ int main(int argc, char *argv[]) {
             }
 
             if (recPacket.LI == 1) {
+                
+                //+1 second
                 print_leap_positive_timestamp(&tv);
                 printf("+ %f +/- %f %s(%s) s%u leap-minute +1seconds\n", oTotal, dTotal, hn,
                        inet_ntoa(their_addr.sin_addr),
@@ -236,6 +239,8 @@ int main(int argc, char *argv[]) {
             }
 
             if (recPacket.LI == 2) {
+                
+                //-1 second
                 print_leap_negative_timestamp(&tv);
                 printf("+ %f +/- %f %s(%s) s%u leap-minute -1seconds\n", oTotal, dTotal, hn,
                        inet_ntoa(their_addr.sin_addr),
@@ -244,11 +249,18 @@ int main(int argc, char *argv[]) {
             }
 
             if (recPacket.LI == 3) {
+                //server clock not sync'd yet
                 printf("Server clock not synchronized, dropping packet\n");
                 printf("Retrying in %d seconds\n", POLL);
                 activePolling = 1;
                 sleep(POLL);
             }
+            
+            if (recPacket.stratum == 0){
+                //get ref identifier
+            }
+            
+            
         }
 
     }

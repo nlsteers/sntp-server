@@ -29,7 +29,6 @@ int main(void) {
     struct ip_mreq multi;
 
     u_int y = 1;
-
     quit = 1;
     update = 1;
     error = 0;
@@ -44,7 +43,7 @@ int main(void) {
     }
 
 
-    if (setsockopt(sockfd,SOL_SOCKET,SO_REUSEADDR,&y,sizeof(y)) < 0) {
+    if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &y, sizeof(y)) < 0) {
         perror("Socket reuse error");
         exit(1);
     }
@@ -65,21 +64,23 @@ int main(void) {
         exit(1);
     }
 
-    multi.imr_multiaddr.s_addr=inet_addr(SNTP_GROUP);
-    multi.imr_interface.s_addr=htonl(INADDR_ANY);
-    if (setsockopt(sockfd,IPPROTO_IP,IP_ADD_MEMBERSHIP,&multi,sizeof(multi)) < 0) {
+    multi.imr_multiaddr.s_addr = inet_addr(SNTP_GROUP);
+    multi.imr_interface.s_addr = htonl(INADDR_ANY);
+    if (setsockopt(sockfd, IPPROTO_IP, IP_ADD_MEMBERSHIP, &multi, sizeof(multi)) < 0) {
         perror("Error joining multicast group");
         exit(1);
     }
 
 
-
-
     addr_len = sizeof(struct sockaddr);
 
+    //clock not synchronized
     sendPacket.LI = 3;
+    //version 4
     sendPacket.VN = 4;
+    //server response
     sendPacket.MODE = 4;
+
     sendPacket.stratum = 1;
 
     printf("Joined multicast group %s ...\n", SNTP_GROUP);
@@ -106,12 +107,17 @@ int main(void) {
 
         printf("Got request from %s\n", inet_ntoa(their_addr.sin_addr));
 
-        sendPacket.poll = recPacket.poll;
-        sendPacket.precision = 0;
+      //check that the client did not supply a poll time
 
+        if (recPacket.poll == 0) {
+            sendPacket.poll = (uint8_t) Log2(20);
+        } else {
+            sendPacket.poll = recPacket.poll;
+        }
+//set response origin time to transmit time of request
         sendPacket.origin_ts_sec = recPacket.trans_ts_sec;
         sendPacket.origin_ts_frac = recPacket.trans_ts_frac;
-
+//host to network byte swap
         tempSeconds = htonl(ntp.second);
         tempFractions = htonl(ntp.fraction);
 
@@ -120,12 +126,12 @@ int main(void) {
 
         memset(&tv, 0, sizeof(struct timeval));
         memset(&ntp, 0, sizeof(struct ntp_time_t));
-
+//get system time
         get_ntp_time(&tv, &ntp);
 
         tempSeconds = htonl(ntp.second);
         tempFractions = htonl(ntp.fraction);
-
+//set transmitted time of response
         sendPacket.trans_ts_sec = (uint32_t) tempSeconds;
         sendPacket.trans_ts_frac = (uint32_t) tempFractions;
 
@@ -136,7 +142,7 @@ int main(void) {
             goto ERROR;
 
         }
-
+//check the reference time, if 60 seconds out of date since last response update
         if (ntohl(sendPacket.trans_ts_sec) > (ntohl(sendPacket.ref_ts_sec) + 60)) {
             update = 1;
         }
@@ -145,7 +151,7 @@ int main(void) {
         memset(&ntp, 0, sizeof(struct ntp_time_t));
 
         printf("Response sent to %s\n", inet_ntoa(their_addr.sin_addr));
-
+//label to skip method if errors encountered
         ERROR:
         if (error == 1) {
             printf("Response not formed\n");
@@ -154,6 +160,8 @@ int main(void) {
 
 
     } while (quit != 0);
+    
+    //should never get here
     printf("Exiting...\n");
     close(sockfd);
     exit(0);

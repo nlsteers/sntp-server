@@ -9,7 +9,6 @@
 #include "../include/time-conversion.h"
 
 #define MYPORT 4950
-#define SNTP_GROUP "224.0.1.1"
 
 
 /* the port users connect to */
@@ -46,7 +45,7 @@ int main(void) {
     my_addr.sin_port = htons(MYPORT);
     /* ... short, network byte order */
     my_addr.sin_addr.s_addr = INADDR_ANY;
-    /* any of server IP addrs */
+    /* any of server IPs */
 
 
     if (bind(sockfd, (struct sockaddr *) &my_addr,
@@ -60,6 +59,16 @@ int main(void) {
     sendPacket.VN = 4;
     sendPacket.MODE = 4;
     sendPacket.stratum = 1;
+
+    memcpy(&sendPacket.ref_ID, "LOCL", 4);
+
+
+    printf("%u\n", sendPacket.ref_ID);
+
+    if(memcmp(&sendPacket.ref_ID, "LOCL", 4) == 0){
+        printf("Ref ID: LOCL\n");
+    }
+
 
     printf("Online...\n");
 
@@ -85,12 +94,19 @@ int main(void) {
 
         printf("Got request from %s\n", inet_ntoa(their_addr.sin_addr));
 
-        sendPacket.poll = recPacket.poll;
-        sendPacket.precision = 0;
+        //check that the client did not supply a poll time
 
+        if (recPacket.poll == 0) {
+            sendPacket.poll = (uint8_t) Log2(20);
+        } else {
+            sendPacket.poll = recPacket.poll;
+        }
+
+//set response origin time to transmit time of request
         sendPacket.origin_ts_sec = recPacket.trans_ts_sec;
         sendPacket.origin_ts_frac = recPacket.trans_ts_frac;
 
+//host to network byte swap
         tempSeconds = htonl(ntp.second);
         tempFractions = htonl(ntp.fraction);
 
@@ -99,12 +115,12 @@ int main(void) {
 
         memset(&tv, 0, sizeof(struct timeval));
         memset(&ntp, 0, sizeof(struct ntp_time_t));
-
+//get system time
         get_ntp_time(&tv, &ntp);
 
         tempSeconds = htonl(ntp.second);
         tempFractions = htonl(ntp.fraction);
-
+//set transmitted time of response
         sendPacket.trans_ts_sec = (uint32_t) tempSeconds;
         sendPacket.trans_ts_frac = (uint32_t) tempFractions;
 
@@ -115,7 +131,7 @@ int main(void) {
             goto ERROR;
 
         }
-
+//check the reference time, if 60 seconds out of date since last response update
         if (ntohl(sendPacket.trans_ts_sec) > (ntohl(sendPacket.ref_ts_sec) + 60)) {
             update = 1;
         }
@@ -125,6 +141,7 @@ int main(void) {
 
         printf("Response sent to %s\n", inet_ntoa(their_addr.sin_addr));
 
+//label to skip method if errors encountered
         ERROR:
         if (error == 1) {
             printf("Response not formed\n");
@@ -133,6 +150,9 @@ int main(void) {
 
 
     } while (quit != 0);
+
+    //should never get here
+
     printf("Exiting...\n");
     close(sockfd);
     exit(0);

@@ -31,6 +31,8 @@ netdb.h
 -
 math.h
 -
+sys/timex.h
+-
 ntp-time.h
 /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/include/ntp-time.h
 sntp-packet.h

@@ -13,6 +13,7 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <math.h>
+#include <sys/timex.h>
 #include "ntp-time.h"
 #include "sntp-packet.h"
 
@@ -21,8 +22,12 @@
 //ref http://waitingkuo.blogspot.co.uk/2012/06/conversion-between-ntp-time-and-unix.html
 
 void ntp_time_to_unix_time(struct ntp_time_t *ntp, struct timeval *tv) {
+
+
     tv->tv_sec = ntp->second - 2208988800; // the seconds from Jan 1, 1900 to Jan 1, 1970
     tv->tv_usec = (uint32_t) ((double) ntp->fraction * 1.0e6 / (double) (1LL << 32));
+
+
 }
 
 void unix_time_to_ntp_time(struct timeval *tv, struct ntp_time_t *ntp) {
@@ -36,6 +41,10 @@ void get_time(struct timeval *tv) {
     gettimeofday(tv, NULL);
 }
 
+void get_ntp_time(struct timeval *tv, struct ntp_time_t *ntp) {
+    gettimeofday(tv, NULL);
+    unix_time_to_ntp_time(tv, ntp);
+}
 
 void print_timestamp(struct timeval *tv) {
     time_t t2 = (time_t) tv->tv_sec;
@@ -92,10 +101,7 @@ void print_leap_negative_timestamp(struct timeval *tv) {
     printf("%s ", b1);
 }
 
-void get_ntp_time(struct timeval *tv, struct ntp_time_t *ntp) {
-    gettimeofday(tv, NULL);
-    unix_time_to_ntp_time(tv, ntp);
-}
+
 
 
 void print_network_packet(struct sntpPacket *sntp) {
@@ -241,19 +247,18 @@ void get_reference_time(struct sntpPacket *sendPacket) {
     sendPacket->ref_ts_sec = referencePacket.trans_ts_sec;
     sendPacket->ref_ts_frac = referencePacket.trans_ts_frac;
     sendPacket->ref_ID = referencePacket.ref_ID;
+    sendPacket->root_delay =  referencePacket.root_delay;
+    sendPacket->root_dispersion =  referencePacket.root_dispersion;
+    sendPacket->precision = referencePacket.precision;
 //set stratum
     sendPacket->stratum = stratumTemp;
 
-    printf("Reference update succeeded.\nNew NTP time: \nSeconds %u Fractions %u\n", ntohl(sendPacket->ref_ts_sec),
-           ntohl(sendPacket->ref_ts_frac));
+    printf("Reference update succeeded.\n");
 
     ERROR:
     if (error == 1) {
         printf("Failed to update reference time\n");
     }
-
 }
-
-
 
 #endif //SNTP_COURSEWORK_TIME_CONVERSION_H

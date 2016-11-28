@@ -7,10 +7,15 @@
 
 #include <stdint.h>
 #define SNTP_GROUP "224.0.1.1"
+
+//structure for the SNTP packet
+
 struct sntpPacket {
+    //-----first 8 bits for flags------
     unsigned MODE:3;
     unsigned VN:3;
     unsigned LI:2;
+    //---------------------------------
     uint8_t stratum;
     uint8_t poll;
     int8_t precision;
