@@ -8,7 +8,8 @@
 #include "../include/time-conversion.h"
 
 //uint16_t PORT = 123;
-uint16_t PORT = 4950;
+//uint16_t PORT = 4950;
+uint16_t PORT = 5000;
 uint16_t POLL = 20;
 
 
@@ -32,8 +33,9 @@ int main(int argc, char *argv[]) {
 
     char hn[256];
     //strcpy(hn, "0.uk.pool.ntp.org");
-    strcpy(hn, "localhost");
-
+    //strcpy(hn, "localhost");
+    //strcpy(hn, "ntp.uwe.ac.uk");
+    strcpy(hn, "164.11.80.43");
 
     for (i = 1; i < argc; i++) {
 

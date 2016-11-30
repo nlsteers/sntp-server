@@ -8,7 +8,7 @@
 #include <arpa/inet.h>
 #include "../include/time-conversion.h"
 
-#define PORT 4950
+#define PORT 6000
 #define SNTP_GROUP "224.0.1.1"
 
 
@@ -24,14 +24,16 @@ int main(void) {
     /* info for my addr i.e. server */
     struct sockaddr_in their_addr;
     /* client's address info */
-    int addr_len, quit, update, error;
+    int addr_len, quit, update, error, ttl;
     long tempSeconds, tempFractions;
     struct ip_mreq multi;
+
 
     u_int y = 1;
     quit = 1;
     update = 1;
     error = 0;
+    ttl = 64;
 
     memset(&sendPacket, 0, sizeof(struct sntpPacket));
     memset(&recPacket, 0, sizeof(struct sntpPacket));
@@ -44,6 +46,11 @@ int main(void) {
 
 
     if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &y, sizeof(y)) < 0) {
+        perror("Socket reuse error");
+        exit(1);
+    }
+
+    if (setsockopt(sockfd, IPPROTO_IP, IP_MULTICAST_TTL, &ttl, sizeof(ttl)) < 0) {
         perror("Socket reuse error");
         exit(1);
     }

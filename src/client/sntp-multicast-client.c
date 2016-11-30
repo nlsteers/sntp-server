@@ -11,7 +11,7 @@
 
 
 //uint16_t PORT = 123;
-uint16_t PORT = 4950;
+uint16_t PORT = 6000;
 uint16_t POLL = 20;
 
 
@@ -29,16 +29,17 @@ int main(int argc, char *argv[]) {
 
     u_int y = 1;
 
+    int ttl = 64;
+
     socklen_t addr_len;
 
     struct hostent *he;
     struct sockaddr_in their_addr;
-    struct ip_mreq multi;
 
 
     char hn[256];
     //strcpy(hn, "0.uk.pool.ntp.org");
-    strcpy(hn, "localhost");
+    strcpy(hn, "224.0.1.1");
 
 //iterate through command line arguments
     for (i = 1; i < argc; i++) {
@@ -94,6 +95,17 @@ int main(int argc, char *argv[]) {
     }
     if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) == -1) {
         perror("Error setting socket descriptor");
+        exit(1);
+    }
+
+
+    if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &y, sizeof(y)) < 0) {
+        perror("Socket reuse error");
+        exit(1);
+    }
+
+    if (setsockopt(sockfd, IPPROTO_IP, IP_MULTICAST_TTL, &ttl, sizeof(ttl)) < 0) {
+        perror("Socket TTL Error");
         exit(1);
     }
 
