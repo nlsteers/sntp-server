@@ -11,7 +11,8 @@
 
 
 //uint16_t PORT = 123;
-uint16_t PORT = 6000;
+//uint16_t PORT = 6000;
+uint16_t PORT = 4950;
 uint16_t POLL = 20;
 
 
@@ -25,11 +26,11 @@ int main(int argc, char *argv[]) {
     memset(&sendPacket, 0, sizeof(struct sntpPacket));
     memset(&recPacket, 0, sizeof(struct sntpPacket));
 
-    int sockfd, activePolling, i;
+    int sockfd, activePolling, i, ttl;
 
     u_int y = 1;
 
-    int ttl = 64;
+    ttl = 64;
 
     socklen_t addr_len;
 
@@ -270,13 +271,14 @@ int main(int argc, char *argv[]) {
             
             if (recPacket.stratum == 0){
                 //get ref identifier
+                
+                
+                getCode((uint32_t) &recPacket.ref_ID);
+
+               
             }
-            
-            
         }
-
     }
-
     close(sockfd);
     return 0;
 }

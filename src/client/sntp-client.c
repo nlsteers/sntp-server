@@ -8,8 +8,7 @@
 #include "../include/time-conversion.h"
 
 //uint16_t PORT = 123;
-//uint16_t PORT = 4950;
-uint16_t PORT = 5000;
+uint16_t PORT = 4950;
 uint16_t POLL = 20;
 
 
@@ -33,9 +32,9 @@ int main(int argc, char *argv[]) {
 
     char hn[256];
     //strcpy(hn, "0.uk.pool.ntp.org");
-    //strcpy(hn, "localhost");
+    strcpy(hn, "localhost");
     //strcpy(hn, "ntp.uwe.ac.uk");
-    strcpy(hn, "164.11.80.43");
+    //strcpy(hn, "164.11.80.43");
 
     for (i = 1; i < argc; i++) {
 
@@ -208,6 +207,7 @@ int main(int argc, char *argv[]) {
 
 //convert to human readable
 
+          
 
             if (recPacket.LI == 0) {
                 print_timestamp(&tv);
@@ -238,6 +238,12 @@ int main(int argc, char *argv[]) {
                 activePolling = 1;
                 sleep(POLL);
             }
+
+            if (recPacket.stratum == 0){
+                //get ref identifier
+                getCode(&recPacket);
+            }
+
         }
 
     }

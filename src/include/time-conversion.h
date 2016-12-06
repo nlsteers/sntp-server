@@ -102,8 +102,6 @@ void print_leap_negative_timestamp(struct timeval *tv) {
 }
 
 
-
-
 void print_network_packet(struct sntpPacket *sntp) {
     printf("Packet contains: \n"
                    "Stratum: %u \n"
@@ -136,10 +134,72 @@ void print_network_packet(struct sntpPacket *sntp) {
            ntohl(sntp->trans_ts_frac));
 }
 
-double Log2( double n )
-{
+double Log2(double n) {
     // log(n)/log(2) is log2.
-    return log( n ) / log( 2 );
+    return log(n) / log(2);
+}
+
+int getCode(struct sntpPacket *refCode) {
+
+    int code = 0;
+
+    if(memcmp(&refCode->ref_ID, "ACST", 4) == 0){
+        printf("Ref ID: ACST\n The association belongs to an anycast server\n");
+        code = 10;
+    }
+    if(memcmp(&refCode->ref_ID, "AUTH", 4) == 0){
+        printf("Ref ID: AUTH\n Server authentication failed\n");
+        code =  11;
+    }
+    if(memcmp(&refCode->ref_ID, "AUTO", 4) == 0){
+        printf("Ref ID: AUTO\n Autokey sequence failed\n");
+        code =  12;
+    }
+    if(memcmp(&refCode->ref_ID, "BCST", 4) == 0){
+        printf("Ref ID: BCST\n The association belongs to a broadcast server\n");
+        code =  13;
+    }
+    if(memcmp(&refCode->ref_ID, "CRYP", 4) == 0){
+        printf("Ref ID: CRYP\n Cryptographic authentication or identification failed\n");
+        code =  14;
+    }
+    if(memcmp(&refCode->ref_ID, "DENY", 4) == 0){
+        printf("Ref ID: DENY\n Access denied by remote server\n");
+        code =  15;
+    }
+    if(memcmp(&refCode->ref_ID, "DROP", 4) == 0){
+        printf("Ref ID: DROP\n Lost peer in symmetric mode\n");
+        code =  16;
+    }
+    if(memcmp(&refCode->ref_ID, "RSTR", 4) == 0){
+        printf("Ref ID: RSTR\n Access denied due to local policy\n");
+        code =  17;
+    }
+    if(memcmp(&refCode->ref_ID, "INIT", 4) == 0){
+        printf("Ref ID: INIT\n The association has not yet synchronized for the first time\n");
+        code =  18;
+    }
+    if(memcmp(&refCode->ref_ID, "MCST", 4) == 0){
+        printf("Ref ID: MCST\n The association belongs to a manycast server\n");
+        code =  19;
+    }
+    if(memcmp(&refCode->ref_ID, "NKEY", 4) == 0){
+        printf("Ref ID: NKEY\n No key found. Either the key was never installed or is not trusted\n");
+        code =  20;
+    }
+    if(memcmp(&refCode->ref_ID, "RATE", 4) == 0){
+        printf("Ref ID: RATE\n Rate exceeded. The server has temporarily denied access because the client exceeded the rate threshold\n");
+        code =  21;
+    }
+    if(memcmp(&refCode->ref_ID, "RMOT", 4) == 0){
+        printf("Ref ID: RMOT\n Somebody is tinkering with the association from a remote host running ntpdc\n");
+        code =  22;
+    }
+    if(memcmp(&refCode->ref_ID, "STEP", 4) == 0){
+        printf("Ref ID: STEP\n A step change in system time has occurred, but the association has not yet resynchronized\n");
+        code =  23;
+    }
+    return code;
 }
 
 void get_reference_time(struct sntpPacket *sendPacket) {
@@ -177,6 +237,7 @@ void get_reference_time(struct sntpPacket *sendPacket) {
 
     if ((he = gethostbyname(hn)) == NULL) {
         perror("Error resolving reference hostname\n");
+        printf("Could not reach %s\n", hn);
         error = 1;
         goto ERROR;
     }
@@ -247,8 +308,8 @@ void get_reference_time(struct sntpPacket *sendPacket) {
     sendPacket->ref_ts_sec = referencePacket.trans_ts_sec;
     sendPacket->ref_ts_frac = referencePacket.trans_ts_frac;
     sendPacket->ref_ID = referencePacket.ref_ID;
-    sendPacket->root_delay =  referencePacket.root_delay;
-    sendPacket->root_dispersion =  referencePacket.root_dispersion;
+    sendPacket->root_delay = referencePacket.root_delay;
+    sendPacket->root_dispersion = referencePacket.root_dispersion;
     sendPacket->precision = referencePacket.precision;
 //set stratum
     sendPacket->stratum = stratumTemp;

@@ -3,10 +3,7 @@
 //
 
 #include "gtest/gtest.h"
-
 #include "include/time-conversion.h"
-
-
 
 TEST(checks, test_log_function){
     //checks that the log2 function returns an expected result (within error bounds)
@@ -40,5 +37,14 @@ TEST(checks, test_unix_to_ntp){
     unix_time_to_ntp_time(&tv, &ntp);
     EXPECT_EQ(ntp.second, 3689345377);
     EXPECT_EQ(ntp.fraction, 1562367368);
+}
+
+TEST(checks, test_get_ref_code){
+    //checks that the reference code can be determined
+    struct sntpPacket testpacket;
+    memset(&testpacket, 0, sizeof(struct sntpPacket));
+    memcpy(&testpacket.ref_ID, "DROP", 4);
+    int code = getCode(&testpacket);
+    EXPECT_EQ(code, 16);
 }
 

@@ -60,15 +60,6 @@ int main(void) {
     sendPacket.MODE = 4;
     sendPacket.stratum = 1;
 
-    memcpy(&sendPacket.ref_ID, "LOCL", 4);
-
-
-    printf("%u\n", sendPacket.ref_ID);
-
-    if(memcmp(&sendPacket.ref_ID, "LOCL", 4) == 0){
-        printf("Ref ID: LOCL\n");
-    }
-
 
     printf("Online...\n");
 

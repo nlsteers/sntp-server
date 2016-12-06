@@ -8,11 +8,8 @@
 #include <arpa/inet.h>
 #include "../include/time-conversion.h"
 
-#define PORT 6000
-#define SNTP_GROUP "224.0.1.1"
-
-
-/* the port users connect to */
+#define PORT 4950
+// the port users connect to
 
 
 int main(void) {
@@ -35,6 +32,7 @@ int main(void) {
     error = 0;
     ttl = 64;
 
+    //zero packets
     memset(&sendPacket, 0, sizeof(struct sntpPacket));
     memset(&recPacket, 0, sizeof(struct sntpPacket));
 
@@ -169,6 +167,7 @@ int main(void) {
     } while (quit != 0);
     
     //should never get here
+
     printf("Exiting...\n");
     close(sockfd);
     exit(0);

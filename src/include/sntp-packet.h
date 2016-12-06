@@ -12,6 +12,7 @@
 
 struct sntpPacket {
     //-----first 8 bits for flags------
+    //reversed from RFC because otherwise it doesn't work...
     unsigned MODE:3;
     unsigned VN:3;
     unsigned LI:2;
