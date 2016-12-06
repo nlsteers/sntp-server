@@ -27,11 +27,11 @@ Run the client with `./sntp-client`, accepted arguments are:
 
 ## Installation
 
-Use the root level `CMAKELISTS` file to generate the executables and test suite.
+Use `CMAKE` to generate the executables and test suite.
 
 ## Tests
 
-The test suite uses the googletest framework to acheive test coverage, load the project into an IDE to run the test suite or run `checks.cpp` from the command line. `CMAKELISTS` should handle the set up.  
+The test suite uses the googletest framework to acheive test coverage, load the project into an IDE to run the test suite or run `checks.cpp` from the command line. `CMAKE` will handle the set up.  
 
 ## Contributors
 
