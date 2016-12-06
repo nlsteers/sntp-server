@@ -1,1 +1,1 @@
-/usr/lib64/ccache/cc  -g   CMakeFiles/multicast-server.dir/src/server/sntp-multicast-server.c.o  -o multicast-server -lm 
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/multicast-server.dir/src/server/sntp-multicast-server.c.o  -o multicast-server -lm 
