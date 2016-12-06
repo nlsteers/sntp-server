@@ -270,9 +270,7 @@ int main(int argc, char *argv[]) {
             
             if (recPacket.stratum == 0){
                 //get ref identifier
-                
-                
-                getCode((uint32_t) &recPacket.ref_ID);
+                getCode(&recPacket);
 
                
             }
