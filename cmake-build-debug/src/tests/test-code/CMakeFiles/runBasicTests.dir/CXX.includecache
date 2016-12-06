@@ -31,8 +31,6 @@ netdb.h
 -
 math.h
 -
-sys/timex.h
--
 ntp-time.h
 ../src/include/ntp-time.h
 sntp-packet.h
@@ -310,9 +308,9 @@ cxxabi.h
 acxx_demangle.h
 -
 
-/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/tests/test-code/checks.cpp
+/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/src/tests/test-code/checks.cpp
 gtest/gtest.h
-/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/tests/test-code/gtest/gtest.h
+/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/src/tests/test-code/gtest/gtest.h
 include/time-conversion.h
-/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/tests/test-code/include/time-conversion.h
+/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/src/tests/test-code/include/time-conversion.h
 

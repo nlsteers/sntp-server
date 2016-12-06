@@ -13,7 +13,6 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <math.h>
-#include <sys/timex.h>
 #include "ntp-time.h"
 #include "sntp-packet.h"
 
