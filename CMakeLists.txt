@@ -24,7 +24,6 @@ set(MULTICASTSERVER_FILES
         src/include/sntp-packet.h src/include/ntp-time.h src/include/time-conversion.h)
 
 
-
 add_executable(client ${CLIENT_FILES})
 add_executable(server ${SERVER_FILES})
 add_executable(multicast-client ${MULTICASTCLIENT_FILES})

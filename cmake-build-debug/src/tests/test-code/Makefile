@@ -39,27 +39,38 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = "/Users/nlsteers/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/163.7743.47/CLion.app/Contents/bin/cmake/bin/cmake"
+CMAKE_COMMAND = /home/netlab/nlsteers/Documents/clion-2016.3/bin/cmake/bin/cmake
 
 # The command to remove a file.
-RM = "/Users/nlsteers/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/163.7743.47/CLion.app/Contents/bin/cmake/bin/cmake" -E remove -f
+RM = /home/netlab/nlsteers/Documents/clion-2016.3/bin/cmake/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework"
+CMAKE_SOURCE_DIR = /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug"
+CMAKE_BINARY_DIR = /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/home/netlab/nlsteers/Documents/clion-2016.3/bin/cmake/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
+
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	"/Users/nlsteers/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/163.7743.47/CLion.app/Contents/bin/cmake/bin/cmake" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/home/netlab/nlsteers/Documents/clion-2016.3/bin/cmake/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -80,30 +91,19 @@ list_install_components/fast: list_install_components
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	"/Users/nlsteers/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/163.7743.47/CLion.app/Contents/bin/cmake/bin/cmake" -P cmake_install.cmake
+	/home/netlab/nlsteers/Documents/clion-2016.3/bin/cmake/bin/cmake -P cmake_install.cmake
 .PHONY : install
 
 # Special rule for the target install
 install/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	"/Users/nlsteers/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/163.7743.47/CLion.app/Contents/bin/cmake/bin/cmake" -P cmake_install.cmake
+	/home/netlab/nlsteers/Documents/clion-2016.3/bin/cmake/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
-
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	"/Users/nlsteers/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/163.7743.47/CLion.app/Contents/bin/cmake/bin/cmake" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: install/strip
-
-.PHONY : install/strip/fast
 
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	"/Users/nlsteers/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/163.7743.47/CLion.app/Contents/bin/cmake/bin/cmake" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+	/home/netlab/nlsteers/Documents/clion-2016.3/bin/cmake/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local
 
 # Special rule for the target install/local
@@ -111,27 +111,27 @@ install/local/fast: install/local
 
 .PHONY : install/local/fast
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	"/Users/nlsteers/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/163.7743.47/CLion.app/Contents/bin/cmake/bin/cmake" -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/home/netlab/nlsteers/Documents/clion-2016.3/bin/cmake/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
 
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
+# Special rule for the target install/strip
+install/strip/fast: install/strip
 
-.PHONY : edit_cache/fast
+.PHONY : install/strip/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug" && $(CMAKE_COMMAND) -E cmake_progress_start "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/CMakeFiles" "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/src/tests/test-code/CMakeFiles/progress.marks"
-	cd "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug" && $(MAKE) -f CMakeFiles/Makefile2 src/tests/test-code/all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug/CMakeFiles" 0
+	cd /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_progress_start /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/src/tests/test-code/CMakeFiles/progress.marks
+	cd /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 src/tests/test-code/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug" && $(MAKE) -f CMakeFiles/Makefile2 src/tests/test-code/clean
+	cd /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 src/tests/test-code/clean
 .PHONY : clean
 
 # The main clean target
@@ -141,22 +141,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug" && $(MAKE) -f CMakeFiles/Makefile2 src/tests/test-code/preinstall
+	cd /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 src/tests/test-code/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug" && $(MAKE) -f CMakeFiles/Makefile2 src/tests/test-code/preinstall
+	cd /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 src/tests/test-code/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug" && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 src/tests/test-code/CMakeFiles/runBasicTests.dir/rule:
-	cd "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug" && $(MAKE) -f CMakeFiles/Makefile2 src/tests/test-code/CMakeFiles/runBasicTests.dir/rule
+	cd /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 src/tests/test-code/CMakeFiles/runBasicTests.dir/rule
 .PHONY : src/tests/test-code/CMakeFiles/runBasicTests.dir/rule
 
 # Convenience name for target.
@@ -166,7 +166,7 @@ runBasicTests: src/tests/test-code/CMakeFiles/runBasicTests.dir/rule
 
 # fast build rule for target.
 runBasicTests/fast:
-	cd "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug" && $(MAKE) -f src/tests/test-code/CMakeFiles/runBasicTests.dir/build.make src/tests/test-code/CMakeFiles/runBasicTests.dir/build
+	cd /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug && $(MAKE) -f src/tests/test-code/CMakeFiles/runBasicTests.dir/build.make src/tests/test-code/CMakeFiles/runBasicTests.dir/build
 .PHONY : runBasicTests/fast
 
 checks.o: checks.cpp.o
@@ -175,7 +175,7 @@ checks.o: checks.cpp.o
 
 # target to build an object file
 checks.cpp.o:
-	cd "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug" && $(MAKE) -f src/tests/test-code/CMakeFiles/runBasicTests.dir/build.make src/tests/test-code/CMakeFiles/runBasicTests.dir/checks.cpp.o
+	cd /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug && $(MAKE) -f src/tests/test-code/CMakeFiles/runBasicTests.dir/build.make src/tests/test-code/CMakeFiles/runBasicTests.dir/checks.cpp.o
 .PHONY : checks.cpp.o
 
 checks.i: checks.cpp.i
@@ -184,7 +184,7 @@ checks.i: checks.cpp.i
 
 # target to preprocess a source file
 checks.cpp.i:
-	cd "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug" && $(MAKE) -f src/tests/test-code/CMakeFiles/runBasicTests.dir/build.make src/tests/test-code/CMakeFiles/runBasicTests.dir/checks.cpp.i
+	cd /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug && $(MAKE) -f src/tests/test-code/CMakeFiles/runBasicTests.dir/build.make src/tests/test-code/CMakeFiles/runBasicTests.dir/checks.cpp.i
 .PHONY : checks.cpp.i
 
 checks.s: checks.cpp.s
@@ -193,7 +193,7 @@ checks.s: checks.cpp.s
 
 # target to generate assembly for a file
 checks.cpp.s:
-	cd "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug" && $(MAKE) -f src/tests/test-code/CMakeFiles/runBasicTests.dir/build.make src/tests/test-code/CMakeFiles/runBasicTests.dir/checks.cpp.s
+	cd /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug && $(MAKE) -f src/tests/test-code/CMakeFiles/runBasicTests.dir/build.make src/tests/test-code/CMakeFiles/runBasicTests.dir/checks.cpp.s
 .PHONY : checks.cpp.s
 
 # Help Target
@@ -202,12 +202,12 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... list_install_components"
 	@echo "... install"
-	@echo "... install/strip"
 	@echo "... install/local"
-	@echo "... edit_cache"
+	@echo "... install/strip"
 	@echo "... runBasicTests"
 	@echo "... checks.o"
 	@echo "... checks.i"
@@ -223,6 +223,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug" && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 
