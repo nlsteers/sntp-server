@@ -1,1 +1,0 @@
-/usr/lib64/ccache/cc  -g   CMakeFiles/multicast-client.dir/src/client/sntp-multicast-client.c.o  -o multicast-client -lm 

@@ -1,4 +1,4 @@
-/home/netlab/nlsteers/Documents/clion-2016.3/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework
+"/Users/nlsteers/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/163.7743.47/CLion.app/Contents/bin/cmake/bin/cmake" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" "/Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework"
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug
+-- Build files have been written to: /Users/nlsteers/Dropbox/Documents/University/Y4/Computer Networks and Operating Systems/sntp-coursework/cmake-build-debug

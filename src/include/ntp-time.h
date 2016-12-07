@@ -1,5 +1,5 @@
 //
-// Created by Nathaniel Steers on 20/11/2016.
+// Created by Nathaniel Steers on 02/11/2016.
 //
 
 #ifndef SNTP_COURSEWORK_NTP_TIME_H

@@ -129,7 +129,7 @@ int main(int argc, char *argv[]) {
     their_addr.sin_port = htons(PORT);
     /* .. short, netwk byte order */
 
-    if (multicast == 0){
+    if (multicast == 0) {
         their_addr.sin_addr = *((struct in_addr *) he->h_addr);
     }
     if (multicast == 1) {
@@ -204,25 +204,13 @@ int main(int argc, char *argv[]) {
 
 //DELAY--------------------------------------------
 
-            double dSec, dUsec;
-            dSec = ((double) arrival.tv_sec - (double) origintv.tv_sec) -
-                   ((double) transmittv.tv_sec - (double) receivetv.tv_sec);
-            dUsec = ((double) arrival.tv_usec - (double) origintv.tv_usec) -
-                    ((double) transmittv.tv_usec - (double) receivetv.tv_usec);
-
-            double dTotal = dSec + (dUsec / 1000000);
+            double dTotal = calcDelay(&arrival, &origintv, &transmittv, &receivetv);
 
 //------------------------------------------------------
 
 //OFFSET------------------------------------------------
 
-            double oSec, oUsec;
-            oSec = ((double) receivetv.tv_sec - (double) origintv.tv_sec) +
-                   ((double) transmittv.tv_sec - (double) arrival.tv_sec) / 2;
-            oUsec = ((double) receivetv.tv_usec - (double) origintv.tv_usec) +
-                    ((double) transmittv.tv_usec - (double) arrival.tv_usec) / 2;
-
-            double oTotal = oSec + (oUsec / 1000000);
+            double oTotal = calcOffset(&arrival, &origintv, &transmittv, &receivetv);
 
 //------------------------------------------------------
 
@@ -237,50 +225,57 @@ int main(int argc, char *argv[]) {
 
 //check LI for leap seconds
 
+            if (recPacket.stratum > 0 && recPacket.stratum <= 15 ) {
 
-            if (recPacket.LI == 0) {
+                if (recPacket.LI == 0) {
 
-                //no leap
-                print_timestamp(&tv);
-                printf("+ %f +/- %f %s(%s) s%u no-leap\n", oTotal, dTotal, hn, inet_ntoa(their_addr.sin_addr),
-                       recPacket.stratum);
-                activePolling = 0;
+                    //no leap
+                    print_timestamp(&tv);
+                    printf("+ %f +/- %f %s(%s) s%u no-leap\n", oTotal, dTotal, hn, inet_ntoa(their_addr.sin_addr),
+                           recPacket.stratum);
+                    activePolling = 0;
+                }
+
+                if (recPacket.LI == 1) {
+
+                    //+1 second
+                    print_leap_positive_timestamp(&tv);
+                    printf("+ %f +/- %f %s(%s) s%u leap-minute +1seconds\n", oTotal, dTotal, hn,
+                           inet_ntoa(their_addr.sin_addr),
+                           recPacket.stratum);
+                    activePolling = 0;
+                }
+
+                if (recPacket.LI == 2) {
+
+                    //-1 second
+                    print_leap_negative_timestamp(&tv);
+                    printf("+ %f +/- %f %s(%s) s%u leap-minute -1seconds\n", oTotal, dTotal, hn,
+                           inet_ntoa(their_addr.sin_addr),
+                           recPacket.stratum);
+                    activePolling = 0;
+                }
+
+                if (recPacket.LI == 3) {
+                    //server clock not sync'd yet
+                    printf("Server clock not synchronized, dropping packet\n");
+                    printf("Retrying in %d seconds\n", POLL);
+                    activePolling = 1;
+                    sleep(POLL);
+                }
             }
-
-            if (recPacket.LI == 1) {
-
-                //+1 second
-                print_leap_positive_timestamp(&tv);
-                printf("+ %f +/- %f %s(%s) s%u leap-minute +1seconds\n", oTotal, dTotal, hn,
-                       inet_ntoa(their_addr.sin_addr),
-                       recPacket.stratum);
-                activePolling = 0;
+//check stratum for kiss codes
+            if (recPacket.stratum == 0) {
+                //get ref identifier
+                getCode(&recPacket);
             }
-
-            if (recPacket.LI == 2) {
-
-                //-1 second
-                print_leap_negative_timestamp(&tv);
-                printf("+ %f +/- %f %s(%s) s%u leap-minute -1seconds\n", oTotal, dTotal, hn,
-                       inet_ntoa(their_addr.sin_addr),
-                       recPacket.stratum);
-                activePolling = 0;
-            }
-
-            if (recPacket.LI == 3) {
-                //server clock not sync'd yet
-                printf("Server clock not synchronized, dropping packet\n");
-                printf("Retrying in %d seconds\n", POLL);
+//request again if stratum is too high
+            if (recPacket.stratum > 15) {
+                printf("Stratum too high, polling for new response...\n");
                 activePolling = 1;
                 sleep(POLL);
             }
 
-            if (recPacket.stratum == 0) {
-                //get ref identifier
-                getCode(&recPacket);
-
-
-            }
         }
     }
     close(sockfd);

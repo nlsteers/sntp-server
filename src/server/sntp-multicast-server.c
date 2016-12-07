@@ -24,9 +24,8 @@ int main(int argc, char *argv[]) {
     long tempSeconds, tempFractions;
     struct ip_mreq multi;
 
-
     u_int y = 1;
-    quit = 1;
+    quit = 0;
     update = 1;
     error = 0;
     ttl = 64;
@@ -149,14 +148,11 @@ int main(int argc, char *argv[]) {
 
     sendPacket.stratum = 1;
 
-
-
     do {
 
 //listen for request
 
         //update ref time
-
         if (update == 1) {
             get_reference_time(&sendPacket);
             update = 0;
@@ -173,8 +169,7 @@ int main(int argc, char *argv[]) {
 
         printf("Got request from %s\n", inet_ntoa(their_addr.sin_addr));
 
-      //check that the client did not supply a poll time
-
+//check that the client did not supply a poll time
         if (recPacket.poll == 0) {
             sendPacket.poll = (uint8_t) Log2(20);
         } else {
@@ -225,7 +220,7 @@ int main(int argc, char *argv[]) {
         }
 
 
-    } while (quit != 0);
+    } while (quit != 1);
     
     //should never get here
 
