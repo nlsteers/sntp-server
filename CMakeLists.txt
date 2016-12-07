@@ -7,14 +7,6 @@ set(GCC_COVERAGE_LINK_FLAGS "-lm")
 
 add_definitions(${GCC_COVERAGE_LINK_FLAGS})
 
-set(CLIENT_FILES
-        src/client/sntp-client.c
-        src/include/sntp-packet.h src/include/ntp-time.h src/include/time-conversion.h)
-
-set(SERVER_FILES
-        src/server/sntp-server.c
-        src/include/sntp-packet.h src/include/ntp-time.h src/include/time-conversion.h)
-
 set(MULTICASTCLIENT_FILES
         src/client/sntp-multicast-client.c
         src/include/sntp-packet.h src/include/ntp-time.h src/include/time-conversion.h)
@@ -23,18 +15,11 @@ set(MULTICASTSERVER_FILES
         src/server/sntp-multicast-server.c
         src/include/sntp-packet.h src/include/ntp-time.h src/include/time-conversion.h)
 
+add_executable(sntp-client ${MULTICASTCLIENT_FILES})
+add_executable(sntp-server ${MULTICASTSERVER_FILES})
 
-add_executable(client ${CLIENT_FILES})
-add_executable(server ${SERVER_FILES})
-add_executable(multicast-client ${MULTICASTCLIENT_FILES})
-add_executable(multicast-server ${MULTICASTSERVER_FILES})
-
-target_link_libraries(client m)
-target_link_libraries(server m)
-target_link_libraries(multicast-client m)
-target_link_libraries(multicast-server m)
+target_link_libraries(sntp-client m)
+target_link_libraries(sntp-server m)
 
 include_directories(src)
 add_subdirectory(src/tests)
-
-

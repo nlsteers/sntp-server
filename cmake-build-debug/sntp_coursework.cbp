@@ -17,16 +17,6 @@
 					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="edit_cache">
-				<Option working_dir="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
 			<Target title="rebuild_cache">
 				<Option working_dir="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug"/>
 				<Option type="4"/>
@@ -77,30 +67,18 @@
 					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="multicast-server">
-				<Option output="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/multicast-server" prefix_auto="0" extension_auto="0"/>
+			<Target title="edit_cache">
 				<Option working_dir="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src"/>
-					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.9.2/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2"/>
-					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2/x86_64-redhat-linux"/>
-					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2/backward"/>
-				</Compiler>
+				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 multicast-server"/>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
 					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="multicast-server/fast">
-				<Option output="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/multicast-server" prefix_auto="0" extension_auto="0"/>
+			<Target title="sntp-server">
+				<Option output="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/sntp-server" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -115,14 +93,14 @@
 					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2/backward"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 multicast-server/fast"/>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 sntp-server"/>
 					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="multicast-client">
-				<Option output="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/multicast-client" prefix_auto="0" extension_auto="0"/>
+			<Target title="sntp-server/fast">
+				<Option output="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/sntp-server" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -137,14 +115,14 @@
 					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2/backward"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 multicast-client"/>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 sntp-server/fast"/>
 					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="multicast-client/fast">
-				<Option output="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/multicast-client" prefix_auto="0" extension_auto="0"/>
+			<Target title="sntp-client">
+				<Option output="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/sntp-client" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -159,14 +137,14 @@
 					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2/backward"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 multicast-client/fast"/>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 sntp-client"/>
 					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="server">
-				<Option output="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/server" prefix_auto="0" extension_auto="0"/>
+			<Target title="sntp-client/fast">
+				<Option output="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/sntp-client" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -181,73 +159,7 @@
 					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2/backward"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 server"/>
-					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="server/fast">
-				<Option output="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/server" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src"/>
-					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.9.2/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2"/>
-					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2/x86_64-redhat-linux"/>
-					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2/backward"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 server/fast"/>
-					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="client">
-				<Option output="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/client" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src"/>
-					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.9.2/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2"/>
-					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2/x86_64-redhat-linux"/>
-					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2/backward"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 client"/>
-					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="client/fast">
-				<Option output="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/client" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src"/>
-					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.9.2/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2"/>
-					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2/x86_64-redhat-linux"/>
-					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.9.2/../../../../include/c++/4.9.2/backward"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 client/fast"/>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 sntp-client/fast"/>
 					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -406,35 +318,23 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/client/sntp-client.c">
-			<Option target="client"/>
-		</Unit>
 		<Unit filename="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/client/sntp-multicast-client.c">
-			<Option target="multicast-client"/>
+			<Option target="sntp-client"/>
 		</Unit>
 		<Unit filename="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/include/ntp-time.h">
-			<Option target="multicast-server"/>
-			<Option target="multicast-client"/>
-			<Option target="server"/>
-			<Option target="client"/>
+			<Option target="sntp-server"/>
+			<Option target="sntp-client"/>
 		</Unit>
 		<Unit filename="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/include/sntp-packet.h">
-			<Option target="multicast-server"/>
-			<Option target="multicast-client"/>
-			<Option target="server"/>
-			<Option target="client"/>
+			<Option target="sntp-server"/>
+			<Option target="sntp-client"/>
 		</Unit>
 		<Unit filename="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/include/time-conversion.h">
-			<Option target="multicast-server"/>
-			<Option target="multicast-client"/>
-			<Option target="server"/>
-			<Option target="client"/>
+			<Option target="sntp-server"/>
+			<Option target="sntp-client"/>
 		</Unit>
 		<Unit filename="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/server/sntp-multicast-server.c">
-			<Option target="multicast-server"/>
-		</Unit>
-		<Unit filename="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/server/sntp-server.c">
-			<Option target="server"/>
+			<Option target="sntp-server"/>
 		</Unit>
 		<Unit filename="/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/src/tests/lib/googletest/src/gtest-all.cc">
 			<Option target="gtest"/>

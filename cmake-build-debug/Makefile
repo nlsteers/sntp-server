@@ -56,17 +56,6 @@ CMAKE_BINARY_DIR = /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/home/netlab/nlsteers/Documents/clion-2016.3/bin/cmake/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -122,6 +111,17 @@ install/strip/fast: install/strip
 
 .PHONY : install/strip/fast
 
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/home/netlab/nlsteers/Documents/clion-2016.3/bin/cmake/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
+
 # The main all target
 all: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles/progress.marks
@@ -155,56 +155,30 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named multicast-server
+# Target rules for targets named sntp-server
 
 # Build rule for target.
-multicast-server: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 multicast-server
-.PHONY : multicast-server
+sntp-server: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 sntp-server
+.PHONY : sntp-server
 
 # fast build rule for target.
-multicast-server/fast:
-	$(MAKE) -f CMakeFiles/multicast-server.dir/build.make CMakeFiles/multicast-server.dir/build
-.PHONY : multicast-server/fast
+sntp-server/fast:
+	$(MAKE) -f CMakeFiles/sntp-server.dir/build.make CMakeFiles/sntp-server.dir/build
+.PHONY : sntp-server/fast
 
 #=============================================================================
-# Target rules for targets named multicast-client
+# Target rules for targets named sntp-client
 
 # Build rule for target.
-multicast-client: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 multicast-client
-.PHONY : multicast-client
+sntp-client: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 sntp-client
+.PHONY : sntp-client
 
 # fast build rule for target.
-multicast-client/fast:
-	$(MAKE) -f CMakeFiles/multicast-client.dir/build.make CMakeFiles/multicast-client.dir/build
-.PHONY : multicast-client/fast
-
-#=============================================================================
-# Target rules for targets named server
-
-# Build rule for target.
-server: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 server
-.PHONY : server
-
-# fast build rule for target.
-server/fast:
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/build
-.PHONY : server/fast
-
-#=============================================================================
-# Target rules for targets named client
-
-# Build rule for target.
-client: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 client
-.PHONY : client
-
-# fast build rule for target.
-client/fast:
-	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/build
-.PHONY : client/fast
+sntp-client/fast:
+	$(MAKE) -f CMakeFiles/sntp-client.dir/build.make CMakeFiles/sntp-client.dir/build
+.PHONY : sntp-client/fast
 
 #=============================================================================
 # Target rules for targets named gtest_main
@@ -245,40 +219,13 @@ runBasicTests/fast:
 	$(MAKE) -f src/tests/test-code/CMakeFiles/runBasicTests.dir/build.make src/tests/test-code/CMakeFiles/runBasicTests.dir/build
 .PHONY : runBasicTests/fast
 
-src/client/sntp-client.o: src/client/sntp-client.c.o
-
-.PHONY : src/client/sntp-client.o
-
-# target to build an object file
-src/client/sntp-client.c.o:
-	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/sntp-client.c.o
-.PHONY : src/client/sntp-client.c.o
-
-src/client/sntp-client.i: src/client/sntp-client.c.i
-
-.PHONY : src/client/sntp-client.i
-
-# target to preprocess a source file
-src/client/sntp-client.c.i:
-	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/sntp-client.c.i
-.PHONY : src/client/sntp-client.c.i
-
-src/client/sntp-client.s: src/client/sntp-client.c.s
-
-.PHONY : src/client/sntp-client.s
-
-# target to generate assembly for a file
-src/client/sntp-client.c.s:
-	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/sntp-client.c.s
-.PHONY : src/client/sntp-client.c.s
-
 src/client/sntp-multicast-client.o: src/client/sntp-multicast-client.c.o
 
 .PHONY : src/client/sntp-multicast-client.o
 
 # target to build an object file
 src/client/sntp-multicast-client.c.o:
-	$(MAKE) -f CMakeFiles/multicast-client.dir/build.make CMakeFiles/multicast-client.dir/src/client/sntp-multicast-client.c.o
+	$(MAKE) -f CMakeFiles/sntp-client.dir/build.make CMakeFiles/sntp-client.dir/src/client/sntp-multicast-client.c.o
 .PHONY : src/client/sntp-multicast-client.c.o
 
 src/client/sntp-multicast-client.i: src/client/sntp-multicast-client.c.i
@@ -287,7 +234,7 @@ src/client/sntp-multicast-client.i: src/client/sntp-multicast-client.c.i
 
 # target to preprocess a source file
 src/client/sntp-multicast-client.c.i:
-	$(MAKE) -f CMakeFiles/multicast-client.dir/build.make CMakeFiles/multicast-client.dir/src/client/sntp-multicast-client.c.i
+	$(MAKE) -f CMakeFiles/sntp-client.dir/build.make CMakeFiles/sntp-client.dir/src/client/sntp-multicast-client.c.i
 .PHONY : src/client/sntp-multicast-client.c.i
 
 src/client/sntp-multicast-client.s: src/client/sntp-multicast-client.c.s
@@ -296,7 +243,7 @@ src/client/sntp-multicast-client.s: src/client/sntp-multicast-client.c.s
 
 # target to generate assembly for a file
 src/client/sntp-multicast-client.c.s:
-	$(MAKE) -f CMakeFiles/multicast-client.dir/build.make CMakeFiles/multicast-client.dir/src/client/sntp-multicast-client.c.s
+	$(MAKE) -f CMakeFiles/sntp-client.dir/build.make CMakeFiles/sntp-client.dir/src/client/sntp-multicast-client.c.s
 .PHONY : src/client/sntp-multicast-client.c.s
 
 src/server/sntp-multicast-server.o: src/server/sntp-multicast-server.c.o
@@ -305,7 +252,7 @@ src/server/sntp-multicast-server.o: src/server/sntp-multicast-server.c.o
 
 # target to build an object file
 src/server/sntp-multicast-server.c.o:
-	$(MAKE) -f CMakeFiles/multicast-server.dir/build.make CMakeFiles/multicast-server.dir/src/server/sntp-multicast-server.c.o
+	$(MAKE) -f CMakeFiles/sntp-server.dir/build.make CMakeFiles/sntp-server.dir/src/server/sntp-multicast-server.c.o
 .PHONY : src/server/sntp-multicast-server.c.o
 
 src/server/sntp-multicast-server.i: src/server/sntp-multicast-server.c.i
@@ -314,7 +261,7 @@ src/server/sntp-multicast-server.i: src/server/sntp-multicast-server.c.i
 
 # target to preprocess a source file
 src/server/sntp-multicast-server.c.i:
-	$(MAKE) -f CMakeFiles/multicast-server.dir/build.make CMakeFiles/multicast-server.dir/src/server/sntp-multicast-server.c.i
+	$(MAKE) -f CMakeFiles/sntp-server.dir/build.make CMakeFiles/sntp-server.dir/src/server/sntp-multicast-server.c.i
 .PHONY : src/server/sntp-multicast-server.c.i
 
 src/server/sntp-multicast-server.s: src/server/sntp-multicast-server.c.s
@@ -323,35 +270,8 @@ src/server/sntp-multicast-server.s: src/server/sntp-multicast-server.c.s
 
 # target to generate assembly for a file
 src/server/sntp-multicast-server.c.s:
-	$(MAKE) -f CMakeFiles/multicast-server.dir/build.make CMakeFiles/multicast-server.dir/src/server/sntp-multicast-server.c.s
+	$(MAKE) -f CMakeFiles/sntp-server.dir/build.make CMakeFiles/sntp-server.dir/src/server/sntp-multicast-server.c.s
 .PHONY : src/server/sntp-multicast-server.c.s
-
-src/server/sntp-server.o: src/server/sntp-server.c.o
-
-.PHONY : src/server/sntp-server.o
-
-# target to build an object file
-src/server/sntp-server.c.o:
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/sntp-server.c.o
-.PHONY : src/server/sntp-server.c.o
-
-src/server/sntp-server.i: src/server/sntp-server.c.i
-
-.PHONY : src/server/sntp-server.i
-
-# target to preprocess a source file
-src/server/sntp-server.c.i:
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/sntp-server.c.i
-.PHONY : src/server/sntp-server.c.i
-
-src/server/sntp-server.s: src/server/sntp-server.c.s
-
-.PHONY : src/server/sntp-server.s
-
-# target to generate assembly for a file
-src/server/sntp-server.c.s:
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/sntp-server.c.s
-.PHONY : src/server/sntp-server.c.s
 
 # Help Target
 help:
@@ -359,31 +279,23 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... list_install_components"
 	@echo "... install"
 	@echo "... install/local"
 	@echo "... install/strip"
-	@echo "... multicast-server"
-	@echo "... multicast-client"
-	@echo "... server"
-	@echo "... client"
+	@echo "... edit_cache"
+	@echo "... sntp-server"
+	@echo "... sntp-client"
 	@echo "... gtest_main"
 	@echo "... gtest"
 	@echo "... runBasicTests"
-	@echo "... src/client/sntp-client.o"
-	@echo "... src/client/sntp-client.i"
-	@echo "... src/client/sntp-client.s"
 	@echo "... src/client/sntp-multicast-client.o"
 	@echo "... src/client/sntp-multicast-client.i"
 	@echo "... src/client/sntp-multicast-client.s"
 	@echo "... src/server/sntp-multicast-server.o"
 	@echo "... src/server/sntp-multicast-server.i"
 	@echo "... src/server/sntp-multicast-server.s"
-	@echo "... src/server/sntp-server.o"
-	@echo "... src/server/sntp-server.i"
-	@echo "... src/server/sntp-server.s"
 .PHONY : help
 
 

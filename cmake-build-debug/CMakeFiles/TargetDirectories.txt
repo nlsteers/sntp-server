@@ -1,13 +1,11 @@
-/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles/edit_cache.dir
 /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles/rebuild_cache.dir
 /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles/list_install_components.dir
 /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles/install.dir
 /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles/install/local.dir
 /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles/install/strip.dir
-/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles/multicast-server.dir
-/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles/multicast-client.dir
-/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles/server.dir
-/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles/client.dir
+/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles/sntp-server.dir
+/home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/CMakeFiles/sntp-client.dir
 /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/src/tests/CMakeFiles/edit_cache.dir
 /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/src/tests/CMakeFiles/rebuild_cache.dir
 /home/netlab/nlsteers/Documents/CNOS-Labwork/sntp-coursework/cmake-build-debug/src/tests/CMakeFiles/list_install_components.dir

@@ -8,12 +8,11 @@
 #include <arpa/inet.h>
 #include "../include/time-conversion.h"
 
-#define PORT 4950
-// the port users connect to
+uint16_t PORT = 4950;
 
 
-int main(void) {
-    int sockfd;
+int main(int argc, char *argv[]) {
+    int sockfd, i, multicast;
     struct sntpPacket sendPacket, recPacket;
     struct ntp_time_t ntp = {0};
     struct timeval tv = {0};
@@ -31,10 +30,50 @@ int main(void) {
     update = 1;
     error = 0;
     ttl = 64;
+    multicast = 0;
 
     //zero packets
     memset(&sendPacket, 0, sizeof(struct sntpPacket));
     memset(&recPacket, 0, sizeof(struct sntpPacket));
+
+    //iterate through command line arguments
+    for (i = 1; i < argc; i++) {
+        //show help
+        if (strcmp(argv[i], "-help") == 0) {
+            printf("Usage: \n\n"
+                           "-multicast\n"
+                           "Enables listening on a multicast group\n\n"
+                           "-port\n"
+                           "Use requested port\n\n");
+            exit(0);
+        }
+        //enable multicast
+        if (strcmp(argv[i], "-multicast") == 0) {
+            printf("Listening on multicast channel %s\n", SNTP_GROUP);
+            multicast = 1;
+        }
+
+        //change port
+        if (strcmp(argv[i], "-port") == 0) {
+
+            unsigned short int newPort;
+            int inputs;
+
+            printf("Enter port number: ");
+            inputs = scanf("%hu", &newPort);
+            getchar();
+            if (inputs == EOF) {
+                printf("Bad input, exiting...");
+                exit(1);
+            } else if (inputs == 0) {
+                printf("Using default port: %d\n", PORT);
+            } else {
+                PORT = newPort;
+            }
+
+        }
+
+    }
 
 
     if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) == -1) {
@@ -42,40 +81,62 @@ int main(void) {
         exit(1);
     }
 
+    if (multicast == 1) {
 
-    if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &y, sizeof(y)) < 0) {
-        perror("Socket reuse error");
-        exit(1);
+        if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &y, sizeof(y)) < 0) {
+            perror("Socket reuse error");
+            exit(1);
+        }
+
+        if (setsockopt(sockfd, IPPROTO_IP, IP_MULTICAST_TTL, &ttl, sizeof(ttl)) < 0) {
+            perror("Socket ttl error");
+            exit(1);
+        }
+
+        memset(&my_addr, 0, sizeof(my_addr));
+        /* zero struct */
+        my_addr.sin_family = AF_INET;
+        /* host byte order ... */
+
+        my_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+
+        my_addr.sin_port = htons(PORT);
+        /* ... short, network byte order */
+
+        if (bind(sockfd, (struct sockaddr *) &my_addr,
+                 sizeof(struct sockaddr)) == -1) {
+            perror("Socket bind error");
+            exit(1);
+        }
+
+        multi.imr_multiaddr.s_addr = inet_addr(SNTP_GROUP);
+        multi.imr_interface.s_addr = htonl(INADDR_ANY);
+        if (setsockopt(sockfd, IPPROTO_IP, IP_ADD_MEMBERSHIP, &multi, sizeof(multi)) < 0) {
+            perror("Error joining multicast group");
+            exit(1);
+        }
+
+        printf("Joined multicast group %s ...\n", SNTP_GROUP);
     }
 
-    if (setsockopt(sockfd, IPPROTO_IP, IP_MULTICAST_TTL, &ttl, sizeof(ttl)) < 0) {
-        perror("Socket reuse error");
-        exit(1);
+    if (multicast == 0){
+
+        memset(&my_addr, 0, sizeof(my_addr));
+        /* zero struct */
+        my_addr.sin_family = AF_INET;
+        /* host byte order ... */
+        my_addr.sin_port = htons(PORT);
+        /* ... short, network byte order */
+        my_addr.sin_addr.s_addr = INADDR_ANY;
+        /* any of server IPs */
+
+
+        if (bind(sockfd, (struct sockaddr *) &my_addr,
+                 sizeof(struct sockaddr)) == -1) {
+            perror("Socket bind error");
+            exit(1);
+        }
     }
-
-    memset(&my_addr, 0, sizeof(my_addr));
-    /* zero struct */
-    my_addr.sin_family = AF_INET;
-    /* host byte order ... */
-
-    my_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-
-    my_addr.sin_port = htons(PORT);
-    /* ... short, network byte order */
-
-    if (bind(sockfd, (struct sockaddr *) &my_addr,
-             sizeof(struct sockaddr)) == -1) {
-        perror("Socket bind error");
-        exit(1);
-    }
-
-    multi.imr_multiaddr.s_addr = inet_addr(SNTP_GROUP);
-    multi.imr_interface.s_addr = htonl(INADDR_ANY);
-    if (setsockopt(sockfd, IPPROTO_IP, IP_ADD_MEMBERSHIP, &multi, sizeof(multi)) < 0) {
-        perror("Error joining multicast group");
-        exit(1);
-    }
-
 
     addr_len = sizeof(struct sockaddr);
 
@@ -88,7 +149,7 @@ int main(void) {
 
     sendPacket.stratum = 1;
 
-    printf("Joined multicast group %s ...\n", SNTP_GROUP);
+
 
     do {
 

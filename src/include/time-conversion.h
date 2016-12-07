@@ -36,6 +36,8 @@ void unix_time_to_ntp_time(struct timeval *tv, struct ntp_time_t *ntp) {
 
 //-------------------------------------------------------------------------------------------
 
+
+
 void get_time(struct timeval *tv) {
     gettimeofday(tv, NULL);
 }

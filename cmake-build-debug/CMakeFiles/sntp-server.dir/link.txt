@@ -1,0 +1,1 @@
+/usr/lib64/ccache/cc  -g   CMakeFiles/sntp-server.dir/src/server/sntp-multicast-server.c.o  -o sntp-server -lm 

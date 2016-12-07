@@ -9,9 +9,7 @@
 #include "../include/time-conversion.h"
 
 
-//uint16_t PORT = 123;
-//uint16_t PORT = 6000;
-uint16_t PORT = 4950;
+uint16_t PORT = 123;
 uint16_t POLL = 20;
 
 
@@ -25,12 +23,12 @@ int main(int argc, char *argv[]) {
     memset(&sendPacket, 0, sizeof(struct sntpPacket));
     memset(&recPacket, 0, sizeof(struct sntpPacket));
 
-    int sockfd, activePolling, i, ttl;
+    int sockfd, activePolling, i, ttl, multicast;
 
     u_int y = 1;
 
     ttl = 64;
-
+    multicast = 0;
     socklen_t addr_len;
 
     struct hostent *he;
@@ -38,8 +36,7 @@ int main(int argc, char *argv[]) {
 
 
     char hn[256];
-    //strcpy(hn, "0.uk.pool.ntp.org");
-    strcpy(hn, "224.0.1.1");
+    strcpy(hn, "ntp.uwe.ac.uk");
 
 //iterate through command line arguments
     for (i = 1; i < argc; i++) {
@@ -56,7 +53,9 @@ int main(int argc, char *argv[]) {
         }
         //enable multicast
         if (strcmp(argv[i], "-multicast") == 0) {
-            //multicast = 1;
+            printf("Broadcasting on multicast channel %s\n", SNTP_GROUP);
+            strcpy(hn, "224.0.1.1");
+            multicast = 1;
         }
 
         //change port
@@ -80,10 +79,13 @@ int main(int argc, char *argv[]) {
         }
         //set hostname
         if (strcmp(argv[i], "-host") == 0) {
-
-            printf("Enter hostname: ");
-            fgets(hn, 256, stdin);
-            hn[strlen(hn) - 1] = '\0';
+            if (multicast == 0) {
+                printf("Enter hostname: ");
+                fgets(hn, 256, stdin);
+                hn[strlen(hn) - 1] = '\0';
+            } else {
+                printf("Cannot specify host in multicast mode\n");
+            }
         }
 
     }
@@ -98,15 +100,17 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
+    if (multicast == 1) {
 
-    if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &y, sizeof(y)) < 0) {
-        perror("Socket reuse error");
-        exit(1);
-    }
+        if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &y, sizeof(y)) < 0) {
+            perror("Socket reuse error");
+            exit(1);
+        }
 
-    if (setsockopt(sockfd, IPPROTO_IP, IP_MULTICAST_TTL, &ttl, sizeof(ttl)) < 0) {
-        perror("Socket TTL Error");
-        exit(1);
+        if (setsockopt(sockfd, IPPROTO_IP, IP_MULTICAST_TTL, &ttl, sizeof(ttl)) < 0) {
+            perror("Socket TTL Error");
+            exit(1);
+        }
     }
 
     timeout.tv_sec = 5;
@@ -124,21 +128,24 @@ int main(int argc, char *argv[]) {
     /* host byte order .. */
     their_addr.sin_port = htons(PORT);
     /* .. short, netwk byte order */
-    their_addr.sin_addr.s_addr=inet_addr(SNTP_GROUP);
 
+    if (multicast == 0){
+        their_addr.sin_addr = *((struct in_addr *) he->h_addr);
+    }
+    if (multicast == 1) {
+        their_addr.sin_addr.s_addr = inet_addr(SNTP_GROUP);
+    }
+    //
 
 
     activePolling = 1;
 
-//get reference time
 
     //set flags
 
     sendPacket.LI = 0;
     sendPacket.VN = 4;
     sendPacket.MODE = 3;
-    //sendPacket.poll = (uint8_t) Log2(POLL);
-
 
     while (activePolling == 1) {
 
@@ -232,7 +239,7 @@ int main(int argc, char *argv[]) {
 
 
             if (recPacket.LI == 0) {
-                
+
                 //no leap
                 print_timestamp(&tv);
                 printf("+ %f +/- %f %s(%s) s%u no-leap\n", oTotal, dTotal, hn, inet_ntoa(their_addr.sin_addr),
@@ -241,7 +248,7 @@ int main(int argc, char *argv[]) {
             }
 
             if (recPacket.LI == 1) {
-                
+
                 //+1 second
                 print_leap_positive_timestamp(&tv);
                 printf("+ %f +/- %f %s(%s) s%u leap-minute +1seconds\n", oTotal, dTotal, hn,
@@ -251,7 +258,7 @@ int main(int argc, char *argv[]) {
             }
 
             if (recPacket.LI == 2) {
-                
+
                 //-1 second
                 print_leap_negative_timestamp(&tv);
                 printf("+ %f +/- %f %s(%s) s%u leap-minute -1seconds\n", oTotal, dTotal, hn,
@@ -267,12 +274,12 @@ int main(int argc, char *argv[]) {
                 activePolling = 1;
                 sleep(POLL);
             }
-            
-            if (recPacket.stratum == 0){
+
+            if (recPacket.stratum == 0) {
                 //get ref identifier
                 getCode(&recPacket);
 
-               
+
             }
         }
     }

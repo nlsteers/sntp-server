@@ -59,10 +59,8 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/multicast-server.dir/DependInfo.cmake"
-  "CMakeFiles/multicast-client.dir/DependInfo.cmake"
-  "CMakeFiles/server.dir/DependInfo.cmake"
-  "CMakeFiles/client.dir/DependInfo.cmake"
+  "CMakeFiles/sntp-server.dir/DependInfo.cmake"
+  "CMakeFiles/sntp-client.dir/DependInfo.cmake"
   "src/tests/lib/googletest/CMakeFiles/gtest_main.dir/DependInfo.cmake"
   "src/tests/lib/googletest/CMakeFiles/gtest.dir/DependInfo.cmake"
   "src/tests/test-code/CMakeFiles/runBasicTests.dir/DependInfo.cmake"
